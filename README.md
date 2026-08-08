@@ -12,7 +12,7 @@ pip install -r requirements.txt
 python run.py
 ```
 
-Try: `hello`, `help`, `time`, `echo your message here`, `shop`, `shop products`
+Try: `hello`, `help`, `time`, `echo your message here`, `shop`, `shop products`, `shop import path/to.csv`
 
 ## Shopify app (`alishia-app`)
 
@@ -81,11 +81,38 @@ PYTHONPATH=src python -m alishia_bot.shopify_mcp
 - `shopify_get_order`
 - `shopify_search_customers`
 - `shopify_create_product`
+- `shopify_import_products_csv` — Shopify-style product CSV upsert via `productSet`
 
 **Storefront (public store MCP, no Admin token)**
 
 - `storefront_search_policies`
 - `storefront_update_cart`
+
+### CSV product import
+
+Uses Shopify product-export columns (`Handle`, `Title`, `Body (HTML)`, `Vendor`, `Type`, `Tags`, `OptionN Name/Value`, `Variant Price`, `Variant SKU`, `Image Src`, `Status` / `Published`, …). Rows with the same `Handle` become one product with multiple variants.
+
+**MCP (recommended)**
+
+1. Call `shopify_import_products_csv` with `csv_path` or `csv_text` and `dry_run=true`
+2. Review the parsed product summary
+3. Re-run with `dry_run=false` (needs `write_products`)
+
+**CLI**
+
+```bash
+# preview
+# in the bot: shop import tests/fixtures/sample_products.csv
+# write:
+# shop import tests/fixtures/sample_products.csv --apply
+```
+
+Notes:
+
+- Default limit is 50 products per run (max 200)
+- `update_existing=true` upserts by handle
+- Inventory quantities / location stocking are not written yet (price, SKU, options, images, status are)
+- This is API upsert, not Shopify Admin’s browser “Import CSV” button
 
 ## Project layout
 

@@ -19,6 +19,8 @@ from alishia_bot.shopify_mcp.client import (
     edges_to_nodes,
 )
 from alishia_bot.shopify_mcp.config import ShopifyConfig
+from alishia_bot.shopify_mcp.csv_import import CsvImportError
+from alishia_bot.shopify_mcp.importer import import_products_from_csv
 from alishia_bot.shopify_mcp.storefront import (
     StorefrontMcpError,
     call_storefront_mcp,
@@ -28,8 +30,9 @@ mcp = FastMCP(
     "shopify",
     instructions=(
         "Shopify MCP for Alishia Bot. Admin tools need SHOPIFY_STORE_DOMAIN and "
-        "SHOPIFY_ACCESS_TOKEN. Storefront tools can target any public Shopify "
-        "store domain without an Admin token."
+        "SHOPIFY_ACCESS_TOKEN. Use shopify_import_products_csv for Shopify-style "
+        "product CSV upserts (dry_run first). Storefront tools can target any "
+        "public Shopify store domain without an Admin token."
     ),
 )
 
@@ -245,6 +248,43 @@ def shopify_create_product(
     if errors:
         return _dump({"userErrors": errors})
     return _dump(payload.get("product"))
+
+
+@mcp.tool()
+def shopify_import_products_csv(
+    csv_text: str = "",
+    csv_path: str = "",
+    dry_run: bool = True,
+    update_existing: bool = True,
+    limit: int = 50,
+) -> str:
+    """Import products from a Shopify-style product CSV via Admin productSet.
+
+    Accepts either inline CSV text or a local file path. Defaults to dry_run=true
+    so you can preview parsed products before writing. Rows are grouped by Handle;
+    variants/options/images follow Shopify's product export columns
+    (Title, Body (HTML), Vendor, Type, Tags, OptionN Name/Value, Variant Price,
+    Variant SKU, Image Src, Status/Published, etc.).
+
+    Args:
+        csv_text: Raw CSV contents (Shopify product export format or compatible).
+        csv_path: Absolute/relative path to a CSV file (used when csv_text is empty).
+        dry_run: If true (default), parse/preview only — no Admin writes.
+        update_existing: If true, upsert by handle; if false, create without identifier.
+        limit: Max products to import (1-200, default 50).
+    """
+    try:
+        result = import_products_from_csv(
+            None if dry_run else _client(),
+            csv_text=csv_text,
+            csv_path=csv_path,
+            dry_run=dry_run,
+            update_existing=update_existing,
+            limit=limit,
+        )
+    except (CsvImportError, ShopifyAdminError, ValueError) as exc:
+        return f"Error: {exc}"
+    return _dump(result)
 
 
 @mcp.tool()

@@ -1,0 +1,4 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Price,Variant Inventory Qty,Image Src,Status
+harrison,Harrison,"<p>Family history print</p>",Irish Family Surnames,Prints,"crest, history",true,Size,Standard,HAR-STD,9.90,25,https://cdn.shopify.com/s/files/1/0000/0001/harrison.jpg,ACTIVE
+harrison,,,,,"",,Size,Large,HAR-LRG,12.50,10,,
+hart,Hart,"<p>Family crest</p>",Irish Family Surnames,Prints,crest,false,Title,Default Title,HART-1,14.95,5,,DRAFT

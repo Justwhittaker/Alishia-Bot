@@ -252,6 +252,24 @@ mutation ProductCreate($product: ProductCreateInput!) {
 }
 """
 
+PRODUCT_SET_MUTATION = """
+mutation ProductSet(
+  $input: ProductSetInput!
+  $synchronous: Boolean!
+  $identifier: ProductSetIdentifiers
+) {
+  productSet(synchronous: $synchronous, input: $input, identifier: $identifier) {
+    product {
+      id
+      title
+      handle
+      status
+    }
+    userErrors { field message code }
+  }
+}
+"""
+
 
 def edges_to_nodes(connection: dict[str, Any] | None) -> list[dict[str, Any]]:
     if not connection:

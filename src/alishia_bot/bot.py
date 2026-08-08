@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -12,6 +13,8 @@ from alishia_bot.shopify_mcp.client import (
     edges_to_nodes,
 )
 from alishia_bot.shopify_mcp.config import ShopifyConfig
+from alishia_bot.shopify_mcp.csv_import import CsvImportError
+from alishia_bot.shopify_mcp.importer import import_products_from_csv
 
 
 @dataclass(frozen=True)
@@ -34,7 +37,8 @@ class AlishiaBot:
         if normalized in {"help", "?"}:
             return BotResponse(
                 "Commands: hello, help, time, echo <text>, "
-                "shop, shop products [query]. "
+                "shop, shop products [query], "
+                "shop import <csv-path> [--apply]. "
                 "Edit src/alishia_bot/bot.py to add your own behavior."
             )
 
@@ -54,8 +58,11 @@ class AlishiaBot:
         )
 
     def _handle_shop(self, message: str) -> str:
-        parts = message.split(maxsplit=2)
+        parts = message.split()
         subcommand = parts[1].lower() if len(parts) > 1 else "status"
+
+        if subcommand == "import":
+            return self._handle_shop_import(parts[2:])
 
         try:
             client = ShopifyAdminClient(ShopifyConfig.from_env())
@@ -77,7 +84,7 @@ class AlishiaBot:
                 )
 
             if subcommand == "products":
-                query = parts[2] if len(parts) > 2 else ""
+                query = " ".join(parts[2:]) if len(parts) > 2 else ""
                 variables: dict = {"first": 10}
                 if query:
                     variables["query"] = query
@@ -107,9 +114,78 @@ class AlishiaBot:
 
             return (
                 "Shopify commands: `shop` / `shop status`, "
-                "`shop products [query]`.\n"
+                "`shop products [query]`, "
+                "`shop import <csv-path> [--apply]`.\n"
                 "For full tool access, use the Cursor MCP server "
                 "(`python -m alishia_bot.shopify_mcp`)."
             )
         except ShopifyAdminError as exc:
             return f"Shopify API error: {exc}"
+
+    def _handle_shop_import(self, args: list[str]) -> str:
+        if not args:
+            return (
+                "Usage: `shop import <csv-path> [--apply]`\n"
+                "Default is dry-run preview. Pass `--apply` to write via Admin API."
+            )
+
+        apply = False
+        path_parts: list[str] = []
+        for arg in args:
+            if arg in {"--apply", "--write", "--commit"}:
+                apply = True
+            else:
+                path_parts.append(arg)
+        csv_path = " ".join(path_parts).strip()
+        if not csv_path:
+            return "Usage: `shop import <csv-path> [--apply]`"
+
+        client = None
+        if apply:
+            try:
+                client = ShopifyAdminClient(ShopifyConfig.from_env())
+            except ValueError as exc:
+                return (
+                    f"{exc}\n"
+                    "Set SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN in .env "
+                    "before using --apply."
+                )
+
+        try:
+            result = import_products_from_csv(
+                client,
+                csv_path=csv_path,
+                dry_run=not apply,
+                update_existing=True,
+            )
+        except (CsvImportError, ShopifyAdminError) as exc:
+            return f"CSV import error: {exc}"
+
+        preview = result.get("products") or []
+        lines = [
+            result.get("message") or "Import complete.",
+            f"Parsed {result.get('parsed_count')} product(s); "
+            f"selected {result.get('selected_count')}.",
+        ]
+        for product in preview[:10]:
+            lines.append(
+                f"- {product.get('title')} ({product.get('handle')}) "
+                f"[{product.get('status')}] "
+                f"variants={product.get('variant_count')}"
+            )
+        if len(preview) > 10:
+            lines.append(f"... and {len(preview) - 10} more")
+        if apply:
+            lines.append(
+                json.dumps(
+                    {
+                        "created": len(result.get("created") or []),
+                        "updated": len(result.get("updated") or []),
+                        "failed": result.get("failed") or [],
+                    },
+                    indent=2,
+                )
+            )
+        else:
+            lines.append("Re-run with `--apply` to write these products to Shopify.")
+        return "\n".join(lines)

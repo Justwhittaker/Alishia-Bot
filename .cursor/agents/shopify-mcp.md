@@ -16,10 +16,11 @@ You maintain Alishia Bot’s Shopify MCP integration:
 When invoked:
 
 1. Keep Admin tools behind `SHOPIFY_STORE_DOMAIN` + `SHOPIFY_ACCESS_TOKEN`.
-2. Prefer GraphQL Admin API over REST.
+2. Prefer GraphQL Admin API over REST (`productSet` for CSV upserts).
 3. Do not commit secrets; update `.env.example` for new vars.
 4. Keep Storefront MCP helpers token-free (public store endpoints only).
-5. Add or update tests under `tests/test_shopify_*.py`.
+5. CSV import lives in `csv_import.py` + `importer.py`; default to dry-run.
+6. Add or update tests under `tests/test_shopify_*.py` and `tests/test_csv_import.py`.
 
 Always follow the `agents-in-sidebar` skill: agents stay in `.cursor/agents/`
 and get committed to git.
