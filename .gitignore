@@ -9,3 +9,9 @@ build/
 .mypy_cache/
 .ruff_cache/
 .DS_Store
+
+node_modules/
+
+alishia-app/.env
+alishia-app/.env.*
+!.env.example

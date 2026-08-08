@@ -5,5 +5,6 @@ Custom Cursor agents for Alishia Bot. Files here appear in the **Agents** sideba
 | Agent | Focus |
 |-------|--------|
 | `alishia-bot-core` | Python Alishia Bot package |
+| `shopify-mcp` | Shopify Admin / Storefront MCP server |
 
 See Justin Bot’s `agents-in-sidebar` skill for the required workflow.
