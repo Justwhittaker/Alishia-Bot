@@ -1,5 +1,5 @@
 ---
-name: metric_monitor
+name: metric-monitor
 description: >-
   Fetches live MealDeals scrape metrics from the local API, refreshes the
   scrape-metrics-inspection canvas with summary, category tally, and a

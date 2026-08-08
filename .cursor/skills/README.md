@@ -8,7 +8,7 @@ Custom Cursor skills for Alishia Bot. Each skill is a folder with `SKILL.md` und
 | `agents-in-sidebar` | Keep agents in `.cursor/agents/` and commit |
 | `cookie` | `/cookie` — GDPR cookie consent |
 | `lesson` | `/lesson` — save durable lessons |
-| `metric_monitor` | `/metric_monitor` — scrape metrics canvas |
+| `metric-monitor` | `/metric_monitor` — scrape metrics canvas |
 | `mobile` | `/mobile` — mobile UI/UX fixer |
 | `preview` | `/preview` — open localhost:3000 in browser panel |
 | `push` | `/push` — commit all and push |
