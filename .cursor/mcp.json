@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "shopify": {
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": ["-m", "alishia_bot.shopify_mcp"],
+      "envFile": "${workspaceFolder}/.env",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/src"
+      }
+    },
+    "shopify-dev-mcp": {
+      "command": "npx",
+      "args": ["-y", "@shopify/dev-mcp@latest"],
+      "env": {
+        "OPT_OUT_INSTRUMENTATION": "true"
+      }
+    }
+  }
+}
