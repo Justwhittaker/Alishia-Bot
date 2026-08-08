@@ -1,20 +1,33 @@
-# Shopify product CSV examples
+# Shopify product CSV tools
 
-Generic Shopify Admin **Products → Import** templates (UTF-8).
+## `/shopify_csv` skill
+
+Convert scraped website CSVs into Shopify Admin import CSVs.
+
+- Skill: `.cursor/skills/shopify_csv/SKILL.md`
+- Script: `.cursor/skills/shopify_csv/scripts/convert_to_shopify_csv.py`
+
+**Always outputs `Status=unlisted` and `Published=false`.**
+
+```bash
+python3 .cursor/skills/shopify_csv/scripts/convert_to_shopify_csv.py \
+  path/to/scraped.csv \
+  -o shopify/out/scraped_shopify_unlisted.csv
+```
+
+Converted examples from this repo live in `shopify/out/`.
+
+## Example templates
 
 | File | Use |
 |------|-----|
-| `shopify_product_import_example.csv` | Full standard header set (Google Shopping + Markets columns) |
+| `shopify_product_import_example.csv` | Full standard header set |
 | `shopify_product_import_example_minimal.csv` | Common shorter header set |
 
-## Included sample products
-1. **example-ceramic-mug** — simple product + 2 images
-2. **example-cotton-t-shirt** — Size variants (S/M/L)
-3. **example-digital-guide** — draft, no shipping
+Sample products in the templates: ceramic mug (+ images), cotton tee (S/M/L), digital guide.
 
 ## Import
-Shopify Admin → **Products** → **Import** → upload the CSV.
 
-Replace example titles, SKUs, prices, and image URLs before a live import. Remove sample rows you do not need.
+Shopify Admin → **Products** → **Import** → upload the CSV.
 
 Official docs: https://help.shopify.com/en/manual/products/import-export/using-csv
