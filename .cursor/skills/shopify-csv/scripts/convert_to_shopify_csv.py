@@ -544,6 +544,9 @@ def convert_rows(
     vendor_default: str,
     validate_images: bool,
     report: ConvertReport,
+    status: str = "unlisted",
+    published: str = "false",
+    import_tag: str = "unlisted",
 ) -> list[dict[str, str]]:
     header_map = build_header_map(headers)
     if "title" not in header_map and "handle" not in header_map and "url" not in header_map:
@@ -554,6 +557,9 @@ def convert_rows(
     used_handles: set[str] = set()
     image_cache: dict[str, tuple[bool, str]] = {}
     out: list[dict[str, str]] = []
+    status_value = (status or "unlisted").strip().lower()
+    published_value = (published or "false").strip().lower()
+    tag_marker = (import_tag or status_value).strip()
 
     for index, scraped in enumerate(scraped_rows, start=1):
         report.input_rows += 1
@@ -592,7 +598,7 @@ def convert_rows(
 
         tags = cell(scraped, header_map, "tags")
         if url and "source" not in tags.lower():
-            tags = ", ".join(t for t in [tags, "imported", "unlisted"] if t)
+            tags = ", ".join(t for t in [tags, "imported", tag_marker] if t)
 
         sku = cell(scraped, header_map, "sku")
         if not sku:
@@ -665,9 +671,9 @@ def convert_rows(
                 "Product Category": product_category,
                 "Type": product_type,
                 "Tags": tags,
-                # CRITICAL: always unlisted / not published to Online Store
-                "Published": "false",
-                "Status": "unlisted",
+                # Status/Published forced by /shopify_csv (unlisted) or /shopify_csv_live (active)
+                "Published": published_value,
+                "Status": status_value,
                 "Option1 Name": option1_name,
                 "Option1 Value": option1_value,
                 "Option2 Name": option2_name,
@@ -720,9 +726,9 @@ def convert_rows(
             img_row["Image Src"] = candidate
             img_row["Image Position"] = str(position)
             img_row["Image Alt Text"] = image_alt
-            # Keep unlisted markers even on image-only rows for safety
-            img_row["Published"] = "false"
-            img_row["Status"] = "unlisted"
+            # Keep the same Status/Published markers on image-only rows
+            img_row["Published"] = published_value
+            img_row["Status"] = status_value
             out.append(img_row)
             report.images_kept += 1
             report.output_rows += 1
@@ -779,7 +785,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Convert a source CSV into a Shopify product-import CSV matching "
-            "shopify_product_import_example.csv (always unlisted)."
+            "shopify_product_import_example.csv. Default: unlisted. Use --live for active+published."
         )
     )
     parser.add_argument(
@@ -792,7 +798,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--output",
         type=Path,
         default=None,
-        help="Output Shopify CSV path (default: shopify/out/<stem>_shopify_unlisted.csv)",
+        help="Output Shopify CSV path (default: shopify/out/<stem>_shopify_unlisted.csv or _live)",
     )
     parser.add_argument(
         "--template",
@@ -817,6 +823,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help=f"Default vendor when missing (default: {DEFAULT_VENDOR})",
     )
     parser.add_argument(
+        "--live",
+        action="store_true",
+        help="Force Status=active and Published=true on every row (/shopify_csv_live)",
+    )
+    parser.add_argument(
         "--skip-image-validation",
         action="store_true",
         help="Do not HTTP-validate image URLs (faster; still replaces empty images)",
@@ -831,18 +842,27 @@ def main(argv: list[str] | None = None) -> int:
     input_csv: Path = args.input_csv
     if not input_csv.is_file():
         print(f"Input not found: {input_csv}", file=sys.stderr)
-        print("Usage: /shopify_csv <csv file path>  then optional **custom edits**", file=sys.stderr)
+        print(
+            "Usage: /shopify_csv[_live] <csv file path>  then optional **custom edits**",
+            file=sys.stderr,
+        )
         return 1
 
     template_headers = load_template_headers(args.template)
     SHOPIFY_HEADERS = list(template_headers)
+
+    live = bool(args.live)
+    status_value = "active" if live else "unlisted"
+    published_value = "true" if live else "false"
+    import_tag = "live" if live else "unlisted"
+    suffix = "shopify_live" if live else "shopify_unlisted"
 
     output = args.output
     if output is None:
         out_dir = Path("/workspace/shopify/out")
         if not out_dir.parent.is_dir():
             out_dir = Path("shopify/out")
-        output = out_dir / f"{input_csv.stem}_shopify_unlisted.csv"
+        output = out_dir / f"{input_csv.stem}_{suffix}.csv"
 
     edits_text = args.edits or ""
     if args.edits_file is not None:
@@ -861,13 +881,17 @@ def main(argv: list[str] | None = None) -> int:
         vendor_default=args.vendor,
         validate_images=not args.skip_image_validation,
         report=report,
+        status=status_value,
+        published=published_value,
+        import_tag=import_tag,
     )
     shopify_rows = apply_custom_edits(shopify_rows, custom_edits, report)
     write_csv(output, shopify_rows, headers=SHOPIFY_HEADERS)
     print_report(report, output)
     print(f"Template headers: {len(SHOPIFY_HEADERS)} columns from example CSV")
-    print("Status column forced to: unlisted")
-    print("Published column forced to: false")
+    print(f"Mode: {'LIVE (/shopify_csv_live)' if live else 'SAFE (/shopify_csv)'}")
+    print(f"Status column forced to: {status_value}")
+    print(f"Published column forced to: {published_value}")
     return 0
 
 

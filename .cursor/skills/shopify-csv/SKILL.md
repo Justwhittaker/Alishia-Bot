@@ -241,11 +241,18 @@ Never write a scraped HTML page URL into `Image Src`.
 2. Only if he confirms: regenerate with `Status=draft` and keep `Published=false`.
 3. Never silently switch to `active`.
 
+## Related
+
+For a **live** import (`Status=active` + `Published=true`) with the same
+pipeline and custom edits, use **`/shopify_csv_live`**
+(`.cursor/skills/shopify-csv-live/SKILL.md`) — it calls this converter with
+`--live`.
+
 ## Do not
 
 - Run without a CSV path when one was expected
 - Ignore `**...**` custom edits in the same message
 - Emit headers that differ from `shopify_product_import_example.csv`
-- Publish products (`Published=true` / `Status=active`)
+- Switch this skill to live publish mode (use `/shopify_csv_live` instead)
 - Pass through corrupt image URLs
 - Drop required Shopify variant scaffolding (Option1 + Price)

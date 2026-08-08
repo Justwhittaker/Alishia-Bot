@@ -7,13 +7,22 @@ Column template source of truth: `shopify_product_import_example.csv`
 
 | Command | Purpose |
 |---------|---------|
-| `/shopify_csv <csv file path>` | Convert/repair any CSV → Shopify template (**always unlisted**), apply optional `**custom edits**` |
+| `/shopify_csv <csv file path>` | Convert/repair any CSV → Shopify template (**always unlisted**), optional `**custom edits**` |
+| `/shopify_csv_live <csv file path>` | Same pipeline as `/shopify_csv`, but **`Status=active` + `Published=true`** |
 
 ```bash
-# Convert + apply custom edits from the chat message
+# Safe (unlisted) — /shopify_csv
 python3 .cursor/skills/shopify-csv/scripts/convert_to_shopify_csv.py \
   "path/to/source.csv" \
   -o shopify/out/source_shopify_unlisted.csv \
+  --template shopify/shopify_product_import_example.csv \
+  --edits $'**add collections to all items\nHeraldic Irish Family Names\nGifts under €25 **'
+
+# Live (active + published) — /shopify_csv_live
+python3 .cursor/skills/shopify-csv/scripts/convert_to_shopify_csv.py \
+  "path/to/source.csv" \
+  --live \
+  -o shopify/out/source_shopify_live.csv \
   --template shopify/shopify_product_import_example.csv \
   --edits $'**add collections to all items\nHeraldic Irish Family Names\nGifts under €25 **'
 ```
