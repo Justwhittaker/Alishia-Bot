@@ -13,5 +13,6 @@ Custom Cursor skills for Alishia Bot. Each skill is a folder with `SKILL.md` und
 | `preview` | `/preview` — open localhost:3000 in browser panel |
 | `push` | `/push` — commit all and push |
 | `scrape` | `/scrape` — hospitality scrape refresh |
+| `shopify-csv` | `/shopify_csv <csv path>` — repair/convert CSV to Shopify import (+ `**custom edits**`) |
 
-Source: mirrored from Justin Bot’s `.cursor/skills/`.
+Source: mirrored from Justin Bot’s `.cursor/skills/` (plus Shopify skills for this repo).
