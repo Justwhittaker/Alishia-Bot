@@ -14,6 +14,17 @@ python run.py
 
 Try: `hello`, `help`, `time`, `echo your message here`, `shop`, `shop products`
 
+## Shopify app (`alishia-app`)
+
+Scaffolded with `npm init @shopify/app@latest` (React Router template).
+
+```bash
+cd alishia-app
+shopify app dev
+```
+
+Linked Dev Dashboard app: **alishia-app** (`client_id` in `alishia-app/shopify.app.toml`).
+
 ## Shopify MCP
 
 Alishia Bot ships a **Shopify Admin MCP server** for Cursor (and any MCP client), plus optional CLI shop commands.
