@@ -23,8 +23,21 @@ this repo is open in Cursor Desktop / Cloud.
 | Scope | Path |
 |-------|------|
 | **Workspace** | `.cursor/skills/<name>/SKILL.md` (this folder — committed) |
-| **User** (this machine) | `~/.cursor/skills/<name>/SKILL.md` |
+| **User** (Justin Whittaker profile) | `~/.cursor/skills/<name>/SKILL.md` |
 
-After pulling `main` on Desktop: open **Customize → Skills**, filter **Workspace**.
+### Install into Justin Whittaker’s user profile (Customize → Skills → User)
+
+On Desktop (Mac), from the Alishia-Bot repo root after `git pull`:
+
+```bash
+bash scripts/install-user-skills.sh
+```
+
+That copies every skill into:
+
+- `~/.cursor/skills/` → Customize → Skills → **User**
+- `~/.agents/skills/` → same user scope (compat path)
+
+Then open **Customize → Skills** and filter **User**.
 
 Source: mirrored from Justin Bot’s `.cursor/skills/` (plus Shopify skills for this repo).
