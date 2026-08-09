@@ -31,14 +31,19 @@ scrape that site’s product catalog and build a CSV whose **headers match**
    - `Status=unlisted`
    - `Published=false`
    - Never `active` / `Published=true`.
-3. Pull as much product data as the site exposes (title, body, vendor, type,
+3. **ALWAYS no VAT / no tax** (all CSVs going forward)
+   - `Variant Taxable=false` on every product / variant row
+   - Leave `Variant Tax Code` blank
+   - Do **not** default Taxable to `true` from source data; only set `true` if
+     Justin explicitly asks
+4. Pull as much product data as the site exposes (title, body, vendor, type,
    category, tags, options, SKU, price, compare-at, barcode, weight, images,
    SEO, Google Shopping fields when present).
-4. Validate images; replace corrupt/non-image URLs with the Shopify CDN
+5. Validate images; replace corrupt/non-image URLs with the Shopify CDN
    placeholder.
-5. Fill Shopify-safe placeholders for missing required variant fields so import
+6. Fill Shopify-safe placeholders for missing required variant fields so import
    does not fail.
-6. After a successful scrape, optionally remind Justin to run
+7. After a successful scrape, optionally remind Justin to run
    **`/shopify_scrape_metric`** for the sanity-check canvas.
 
 ## Paths
@@ -65,6 +70,15 @@ Shopify scrape:
 - [ ] 4. Copy CSV to ~/Downloads
 - [ ] 5. Brief summary (products, rows, images kept/replaced)
 ```
+
+### 1. URL argument (required)
+
+The website must appear **after** the slash command, e.g.:
+
+- `/shopify_scrape https://irishfamilysurnames.com/`
+- `/shopify_scrape https://example.myshopify.com/collections/all`
+
+If no URL is provided, ask for one and stop.
 
 ### 2a. Run with Docker (recommended)
 
@@ -162,6 +176,7 @@ Then suggest: run `/shopify_scrape_metric` on the output CSV.
 ## Do not
 
 - Publish products
+- Enable VAT/tax (`Variant Taxable=true`) unless Justin explicitly asks
 - Invent product prices/descriptions beyond declared placeholders
 - Skip image validation unless Justin opts out
 - Scrape behind logins / ignore robots intent on tiny polite delays

@@ -510,8 +510,10 @@ def convert_rows(
         else:
             requires_shipping = "true"
 
+        # Hard rule: no VAT / no tax on all Shopify CSVs going forward.
+        # Only honor an explicit true from source if Justin asks later.
         taxable_raw = cell(scraped, header_map, "taxable").lower()
-        taxable = "false" if taxable_raw in {"false", "0", "no"} else "true"
+        taxable = "true" if taxable_raw in {"true", "1", "yes"} else "false"
 
         row = blank_shopify_row()
         row.update(

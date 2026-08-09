@@ -25,14 +25,19 @@ When Justin runs **`/shopify_csv`**, convert a **scraped** product CSV into a
    - Set **`Published` = `false`** on every product row (and image-only rows).
    - Do **not** leave Status blank (Shopify defaults blank Status to `active`).
    - Do **not** set Published to `true`.
-2. **Pull as much data as possible** from the scraped CSV (title, handle/slug,
+2. **ALWAYS no VAT / no tax** (all CSVs going forward)
+   - Set **`Variant Taxable` = `false`** on every product / variant row.
+   - Leave **`Variant Tax Code`** blank.
+   - Prices are treated as tax-exclusive / no VAT charged via this import field.
+   - Do **not** default Taxable to `true`. Only set `true` if Justin explicitly asks.
+3. **Pull as much data as possible** from the scraped CSV (title, handle/slug,
    description, vendor, type/category, tags, SKU, price, compare-at, barcode,
    weight, qty, options, images, SEO, source URL).
-3. **Images must not be corrupted**
+4. **Images must not be corrupted**
    - Validate image URLs (HTTP, content-type / magic bytes).
    - Drop HTML error pages, JSON, empty, or non-image payloads.
    - Replace bad/missing images with a Shopify CDN placeholder so import still works.
-4. **Missing fields → Shopify-safe placeholders** so the import does not fail
+5. **Missing fields → Shopify-safe placeholders** so the import does not fail
    (Title, Handle, Option1, Variant Price, fulfillment/inventory defaults, body, etc.).
 
 ## Paths
@@ -173,7 +178,8 @@ Unmapped extra image-like columns are still considered for Image Src.
 | Inventory Tracker | `shopify` |
 | Inventory Policy | `deny` |
 | Fulfillment Service | `manual` |
-| Requires Shipping / Taxable | `true` |
+| Requires Shipping | `true` |
+| **Taxable (VAT)** | **`false` (always — no VAT)** |
 | Image Src | Shopify CDN placeholder image |
 | SEO Description | `Imported product — review before publishing.` |
 | **Status** | **`unlisted` (always)** |
@@ -210,6 +216,7 @@ CSV import rejects it:
 ## Do not
 
 - Publish products (`Published=true` / `Status=active`) from this skill
+- Enable VAT/tax (`Variant Taxable=true`) unless Justin explicitly asks
 - Pass through corrupt image URLs
 - Drop required Shopify variant scaffolding (Option1 + Price)
 - Ask Justin to manually fix Status/Published after a successful conversion

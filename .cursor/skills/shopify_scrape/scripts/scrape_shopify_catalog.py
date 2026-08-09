@@ -119,7 +119,7 @@ class Product:
     weight_unit: str = "g"
     cost: str = ""
     requires_shipping: str = "true"
-    taxable: str = "true"
+    taxable: str = "false"  # no VAT / no tax on all Shopify CSVs going forward
     source_url: str = ""
 
 
@@ -611,7 +611,8 @@ def parse_product_page(
                 if grams is not None:
                     product.grams = str(int(grams))
                 product.requires_shipping = "true" if variant.get("requires_shipping", True) else "false"
-                product.taxable = "true" if variant.get("taxable", True) else "false"
+                # Always no VAT / no tax on exported Shopify CSVs
+                product.taxable = "false"
                 options = payload.get("options") or []
                 if options:
                     product.option1_name = str(options[0].get("name") or "Title")
@@ -673,7 +674,7 @@ def product_to_rows(product: Product) -> list[dict[str, str]]:
             "Variant Price": product.price or "0.00",
             "Variant Compare At Price": product.compare_at,
             "Variant Requires Shipping": product.requires_shipping,
-            "Variant Taxable": product.taxable,
+            "Variant Taxable": "false",  # always no VAT / no tax
             "Variant Barcode": product.barcode,
             "Image Src": product.images[0] if product.images else PLACEHOLDER_IMAGE,
             "Image Position": "1",
