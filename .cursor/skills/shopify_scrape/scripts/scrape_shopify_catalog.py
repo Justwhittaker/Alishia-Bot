@@ -134,7 +134,11 @@ class ScrapeReport:
     warnings: list[str] = field(default_factory=list)
 
 
-def fetch(url: str, timeout: float = 20.0) -> tuple[int, str, bytes]:
+def log(message: str) -> None:
+    print(message, flush=True)
+
+
+def fetch(url: str, timeout: float = 15.0) -> tuple[int, str, bytes]:
     request = urllib.request.Request(
         url,
         headers={
@@ -202,15 +206,43 @@ def looks_like_product_url(url: str) -> bool:
     )
 
 
+def parse_sitemap_xml(text: str, report: ScrapeReport, source: str = "sitemap") -> list[str]:
+    found: list[str] = []
+    try:
+        root = ET.fromstring(text)
+    except ET.ParseError:
+        report.warnings.append(f"sitemap parse error: {source}")
+        return found
+    ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    for loc in root.findall(".//sm:url/sm:loc", ns):
+        if not loc.text:
+            continue
+        href = loc.text.strip()
+        if looks_like_product_url(href) or "/product/" in href.lower():
+            found.append(href)
+    return found
+
+
+def discover_from_local_sitemap(path: Path, report: ScrapeReport) -> list[str]:
+    if not path.is_file():
+        report.warnings.append(f"local sitemap missing: {path}")
+        return []
+    text = path.read_text(encoding="utf-8", errors="replace")
+    found = parse_sitemap_xml(text, report, source=str(path))
+    log(f"Local sitemap {path}: {len(found)} product URLs")
+    return found
+
+
 def discover_from_sitemaps(seed: str, report: ScrapeReport) -> list[str]:
     parsed = urllib.parse.urlparse(seed)
     origin = f"{parsed.scheme}://{parsed.netloc}"
+    # Prefer product sitemaps first; keep discovery timeouts short so bad maps don't hang the run.
     candidates = [
-        absolutize(origin, "/sitemap.xml"),
-        absolutize(origin, "/sitemap_products_1.xml"),
         absolutize(origin, "/product-sitemap.xml"),
-        absolutize(origin, "/sitemap_index.xml"),
+        absolutize(origin, "/sitemap_products_1.xml"),
         absolutize(origin, "/wp-sitemap-posts-product-1.xml"),
+        absolutize(origin, "/sitemap.xml"),
+        absolutize(origin, "/sitemap_index.xml"),
     ]
     found: list[str] = []
     seen_maps: set[str] = set()
@@ -219,29 +251,35 @@ def discover_from_sitemaps(seed: str, report: ScrapeReport) -> list[str]:
         if url in seen_maps or depth > 2:
             return
         seen_maps.add(url)
+        log(f"Trying sitemap: {url}")
         try:
-            _, text, _ = fetch(url)
+            _, text, _ = fetch(url, timeout=8.0)
         except Exception as exc:  # noqa: BLE001
             report.warnings.append(f"sitemap miss {url}: {exc}")
+            log(f"  miss: {exc}")
             return
+        nested = []
         try:
             root = ET.fromstring(text)
+            ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+            nested = [
+                loc.text.strip()
+                for loc in root.findall(".//sm:sitemap/sm:loc", ns)
+                if loc.text
+            ]
         except ET.ParseError:
-            # maybe HTML listing — ignore
+            report.warnings.append(f"sitemap parse error: {url}")
             return
-        ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-        for loc in root.findall(".//sm:sitemap/sm:loc", ns):
-            if loc.text:
-                parse_sitemap(loc.text.strip(), depth + 1)
-        for loc in root.findall(".//sm:url/sm:loc", ns):
-            if not loc.text:
-                continue
-            href = loc.text.strip()
-            if looks_like_product_url(href) or "product" in href.lower():
-                found.append(href)
+        for child in nested:
+            parse_sitemap(child, depth + 1)
+        urls = parse_sitemap_xml(text, report, source=url)
+        log(f"  found {len(urls)} product URLs")
+        found.extend(urls)
 
     for candidate in candidates:
         parse_sitemap(candidate)
+        if found:
+            break
     return found
 
 
@@ -279,12 +317,36 @@ def discover_from_html(seed: str, report: ScrapeReport) -> list[str]:
     return found
 
 
-def discover_product_urls(seed: str, limit: int, report: ScrapeReport) -> list[str]:
+def discover_product_urls(
+    seed: str,
+    limit: int,
+    report: ScrapeReport,
+    *,
+    local_sitemap: Path | None = None,
+    urls_file: Path | None = None,
+) -> list[str]:
     ordered: list[str] = []
     seen: set[str] = set()
-    for href in discover_from_sitemaps(seed, report) + discover_from_html(seed, report):
+    collected: list[str] = []
+    if urls_file:
+        if urls_file.is_file():
+            collected.extend(
+                line.strip()
+                for line in urls_file.read_text(encoding="utf-8").splitlines()
+                if line.strip() and not line.strip().startswith("#")
+            )
+            log(f"Loaded {len(collected)} URLs from {urls_file}")
+        else:
+            report.warnings.append(f"urls file missing: {urls_file}")
+    if local_sitemap:
+        collected.extend(discover_from_local_sitemap(local_sitemap, report))
+    if not collected:
+        collected.extend(discover_from_sitemaps(seed, report))
+    if len(collected) < limit:
+        collected.extend(discover_from_html(seed, report))
+
+    for href in collected:
         clean = href.split("?")[0].rstrip("/") + "/"
-        # normalize trailing slash style
         key = clean.lower()
         if key in seen:
             continue
@@ -295,6 +357,7 @@ def discover_product_urls(seed: str, limit: int, report: ScrapeReport) -> list[s
         if len(ordered) >= limit:
             break
     report.product_urls_found = len(ordered)
+    log(f"Discovery complete: {len(ordered)} product URLs (limit {limit})")
     return ordered
 
 
@@ -654,13 +717,21 @@ def scrape(
     vendor: str,
     delay: float,
     validate_images: bool,
+    local_sitemap: Path | None = None,
+    urls_file: Path | None = None,
 ) -> ScrapeReport:
     report = ScrapeReport(seed_url=seed_url)
-    product_urls = discover_product_urls(seed_url, limit=limit, report=report)
+    product_urls = discover_product_urls(
+        seed_url,
+        limit=limit,
+        report=report,
+        local_sitemap=local_sitemap,
+        urls_file=urls_file,
+    )
     if not product_urls:
         raise SystemExit(
             f"No product URLs discovered from {seed_url}. "
-            "Try a shop/collection/sitemap URL."
+            "Try a shop/collection/sitemap URL, or pass --local-sitemap / --urls-file."
         )
 
     used_handles: set[str] = set()
@@ -669,7 +740,7 @@ def scrape(
 
     for index, product_url in enumerate(product_urls, start=1):
         try:
-            _, html, _ = fetch(product_url)
+            _, html, _ = fetch(product_url, timeout=25.0)
             product = parse_product_page(
                 product_url,
                 html,
@@ -683,10 +754,10 @@ def scrape(
             all_rows.extend(rows)
             report.products_scraped += 1
             report.rows_written += len(rows)
-            print(f"[{index}/{len(product_urls)}] {product.title} → {product.handle}")
+            log(f"[{index}/{len(product_urls)}] {product.title} → {product.handle}")
         except Exception as exc:  # noqa: BLE001
             report.warnings.append(f"failed {product_url}: {exc}")
-            print(f"[{index}/{len(product_urls)}] FAIL {product_url}: {exc}", file=sys.stderr)
+            print(f"[{index}/{len(product_urls)}] FAIL {product_url}: {exc}", file=sys.stderr, flush=True)
         if delay > 0 and index < len(product_urls):
             time.sleep(delay)
 
@@ -730,6 +801,18 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--vendor", default="Imported Catalog", help="Default vendor")
     parser.add_argument("--delay", type=float, default=0.35, help="Delay between product fetches")
     parser.add_argument(
+        "--local-sitemap",
+        type=Path,
+        default=None,
+        help="Parse product URLs from a local sitemap XML file first",
+    )
+    parser.add_argument(
+        "--urls-file",
+        type=Path,
+        default=None,
+        help="Text file with one product URL per line",
+    )
+    parser.add_argument(
         "--skip-image-validation",
         action="store_true",
         help="Skip HTTP image validation",
@@ -746,15 +829,17 @@ def main(argv: list[str] | None = None) -> int:
         vendor=args.vendor,
         delay=args.delay,
         validate_images=not args.skip_image_validation,
+        local_sitemap=args.local_sitemap,
+        urls_file=args.urls_file,
     )
-    print(f"Wrote {args.output}")
-    print(
+    log(f"Wrote {args.output}")
+    log(
         f"URLs found: {report.product_urls_found} | scraped: {report.products_scraped} | rows: {report.rows_written}"
     )
-    print(f"Images kept: {report.images_kept} | placeholder replacements: {report.images_replaced}")
-    print("Status forced to unlisted; Published forced to false")
+    log(f"Images kept: {report.images_kept} | placeholder replacements: {report.images_replaced}")
+    log("Status forced to unlisted; Published forced to false")
     if report.warnings:
-        print(f"Warnings: {len(report.warnings)} (see {args.output.with_suffix('.meta.json')})")
+        log(f"Warnings: {len(report.warnings)} (see {args.output.with_suffix('.meta.json')})")
     return 0 if report.products_scraped else 2
 
 

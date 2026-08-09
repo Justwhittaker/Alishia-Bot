@@ -39,4 +39,20 @@ Outputs land in `shopify/out/`. Metrics canvas: `canvases/shopify-scrape-metrics
 
 Shopify Admin → **Products** → **Import** → upload the CSV.
 
+## Docker scrape (recommended)
+
+Run the scraper in an isolated Python container — no host Python setup required.
+
+```bash
+./shopify/docker/run-scrape.sh "https://irishfamilysurnames.com/" "Irish Family Surnames" 500
+```
+
+Output lands in `shopify/out/shopify_scrape_unlisted.csv`. Uses `python:3.12-slim` with the scraper script mounted in.
+
+Optional custom image build (if your Docker supports overlay):
+
+```bash
+docker compose -f shopify/docker/docker-compose.yml build   # uses shopify/docker/Dockerfile
+```
+
 Official docs: https://help.shopify.com/en/manual/products/import-export/using-csv

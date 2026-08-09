@@ -50,6 +50,8 @@ scrape that site’s product catalog and build a CSV whose **headers match**
 | Column template | `shopify/shopify_product_import_example.csv` |
 | Default output | `shopify/out/shopify_scrape_unlisted.csv` |
 | Run metadata | `shopify/out/shopify_scrape_unlisted.meta.json` |
+| **Docker (recommended)** | `shopify/docker/run-scrape.sh` |
+| Docker compose | `shopify/docker/docker-compose.yml` |
 
 ## Workflow
 
@@ -58,22 +60,39 @@ Copy and track:
 ```
 Shopify scrape:
 - [ ] 1. Read URL after /shopify_scrape (required)
-- [ ] 2. Run scrape_shopify_catalog.py against that URL
+- [ ] 2. Run scraper (Docker preferred, or python3 directly)
 - [ ] 3. Verify Status=unlisted + Published=false on all rows
 - [ ] 4. Copy CSV to ~/Downloads
 - [ ] 5. Brief summary (products, rows, images kept/replaced)
 ```
 
-### 1. URL argument (required)
+### 2a. Run with Docker (recommended)
 
-The website must appear **after** the slash command, e.g.:
+Isolated Python 3.12 container, mounts the scraper + output folders. No pip install on host.
 
-- `/shopify_scrape https://irishfamilysurnames.com/shop/`
-- `/shopify_scrape https://example.myshopify.com/collections/all`
+```bash
+./shopify/docker/run-scrape.sh "https://irishfamilysurnames.com/" "Irish Family Surnames" 500
+```
 
-If no URL is provided, ask for one and stop.
+Or compose:
 
-### 2. Run scraper
+```bash
+docker compose -f shopify/docker/docker-compose.yml run --rm shopify-scrape
+```
+
+Override URL/limit by editing `shopify/docker/docker-compose.yml` command block or passing args to `run-scrape.sh`.
+
+**Irish Family Surnames tip:** pass the local sitemap for fast discovery (400 products):
+
+```bash
+./shopify/docker/run-scrape.sh \
+  "https://irishfamilysurnames.com/" \
+  "Irish Family Surnames" \
+  500 \
+  "./scraped-irish-family-surnames/product-sitemap.xml"
+```
+
+### 2b. Run scraper directly (no Docker)
 
 ```bash
 python3 .cursor/skills/shopify_scrape/scripts/scrape_shopify_catalog.py \

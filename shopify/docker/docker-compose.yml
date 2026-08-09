@@ -1,0 +1,22 @@
+services:
+  shopify-scrape:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ../../.cursor/skills/shopify_scrape/scripts:/app/scripts:ro
+      - ../../shopify/out:/data/out
+      - ../../scraped-irish-family-surnames:/data/sitemaps:ro
+    command:
+      - python3
+      - /app/scripts/scrape_shopify_catalog.py
+      - "https://irishfamilysurnames.com/"
+      - "-o"
+      - "/data/out/shopify_scrape_unlisted.csv"
+      - "--vendor"
+      - "Irish Family Surnames"
+      - "--limit"
+      - "500"
+      - "--delay"
+      - "0.15"
+      - "--local-sitemap"
+      - "/data/sitemaps/product-sitemap.xml"
