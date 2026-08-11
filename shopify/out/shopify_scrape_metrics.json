@@ -1,43 +1,284 @@
 {
-  "sourceCsv": "/workspace/shopify/shopify_product_import_example.csv",
+  "sourceCsv": "shopify/out/mullingarpewter_shopify_unlisted.csv",
   "summary": {
-    "totalRows": 6,
-    "products": 3,
-    "productRows": 3,
-    "variantRows": 2,
-    "imageOnlyRows": 1,
-    "categories": 3,
+    "totalRows": 444,
+    "products": 147,
+    "productRows": 147,
+    "variantRows": 0,
+    "imageOnlyRows": 297,
+    "categories": 44,
     "fieldsTracked": 51,
-    "fieldsFullyPresent": 19,
-    "fieldsWithMissing": 32,
-    "fieldsWithPlaceholders": 3,
-    "fieldsCompleteReal": 18,
-    "unlistedProducts": 0,
-    "publishedFalse": 1
+    "fieldsFullyPresent": 28,
+    "fieldsWithMissing": 23,
+    "fieldsWithPlaceholders": 2,
+    "fieldsCompleteReal": 26,
+    "unlistedProducts": 147,
+    "publishedFalse": 147
   },
   "categories": [
     {
-      "category": "Home & Garden > Kitchen & Dining > Tableware > Drinkware > Mugs",
-      "products": 1,
-      "pct": 33.3
+      "category": "Drinkware",
+      "products": 21,
+      "pct": 14.3
     },
     {
-      "category": "Apparel & Accessories > Clothing > Clothing Tops > T-Shirts",
-      "products": 1,
-      "pct": 33.3
+      "category": "Gifts for Men",
+      "products": 12,
+      "pct": 8.2
     },
     {
-      "category": "Digital",
+      "category": "Gift",
+      "products": 10,
+      "pct": 6.8
+    },
+    {
+      "category": "Tankard",
+      "products": 9,
+      "pct": 6.1
+    },
+    {
+      "category": "Cross",
+      "products": 9,
+      "pct": 6.1
+    },
+    {
+      "category": "CHESS SET",
+      "products": 8,
+      "pct": 5.4
+    },
+    {
+      "category": "Religious",
+      "products": 6,
+      "pct": 4.1
+    },
+    {
+      "category": "Flask",
+      "products": 5,
+      "pct": 3.4
+    },
+    {
+      "category": "Homeware",
+      "products": 5,
+      "pct": 3.4
+    },
+    {
+      "category": "Baby Gifts",
+      "products": 5,
+      "pct": 3.4
+    },
+    {
+      "category": "Measure",
+      "products": 4,
+      "pct": 2.7
+    },
+    {
+      "category": "Jewellery",
+      "products": 4,
+      "pct": 2.7
+    },
+    {
+      "category": "GIFTS FOR HER",
+      "products": 4,
+      "pct": 2.7
+    },
+    {
+      "category": "Picture Frame",
+      "products": 3,
+      "pct": 2.0
+    },
+    {
+      "category": "FLASK",
+      "products": 3,
+      "pct": 2.0
+    },
+    {
+      "category": "watch set",
+      "products": 3,
+      "pct": 2.0
+    },
+    {
+      "category": "Christmas Tree Ornament",
+      "products": 3,
+      "pct": 2.0
+    },
+    {
+      "category": "gifts for her",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "Wine",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "MEASURE",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "cross",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "FRAME",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "GOBLETS",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "Wedding",
       "products": 1,
-      "pct": 33.3
+      "pct": 0.7
+    },
+    {
+      "category": "Sculpture",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Sculptures",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "sports awards and trophies",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "gift",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "jewellery boxes",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "drinkware",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "bookmarks",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Watch",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Gift Card",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Gifts for her",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "frames",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "letter openers",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "BOOKMARK",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "POP SOCKETS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "TUMBLERS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "MENS GIFTS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Bookmarks",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "ORNAMENT",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "CORK SCREW",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "CANDLE HOLDER",
+      "products": 1,
+      "pct": 0.7
     }
   ],
   "fields": [
     {
       "field": "Compare At Price / International",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Cost per item",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Age Group",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Condition",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -47,9 +288,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 0",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -59,9 +300,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 1",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -71,9 +312,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 2",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -83,9 +324,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 3",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -95,9 +336,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 4",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -107,9 +348,21 @@
     },
     {
       "field": "Google Shopping / Custom Product",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Gender",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -119,9 +372,9 @@
     },
     {
       "field": "Google Shopping / Google Product Category",
-      "total": 3,
+      "total": 147,
       "present": 0,
-      "missing": 3,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -131,33 +384,9 @@
     },
     {
       "field": "Google Shopping / MPN",
-      "total": 3,
+      "total": 147,
       "present": 0,
-      "missing": 3,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Option2 Name",
-      "total": 5,
-      "present": 0,
-      "missing": 5,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Option2 Value",
-      "total": 5,
-      "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -167,9 +396,9 @@
     },
     {
       "field": "Option3 Name",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -179,9 +408,9 @@
     },
     {
       "field": "Option3 Value",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -191,9 +420,33 @@
     },
     {
       "field": "Price / International",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Product Category",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Variant Compare At Price",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -203,9 +456,9 @@
     },
     {
       "field": "Variant Image",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -215,9 +468,9 @@
     },
     {
       "field": "Variant Tax Code",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -226,203 +479,47 @@
       "placeholderPct": 0.0
     },
     {
+      "field": "Option2 Name",
+      "total": 147,
+      "present": 2,
+      "missing": 145,
+      "real": 2,
+      "placeholder": 0,
+      "presentPct": 1.4,
+      "missingPct": 98.6,
+      "realPct": 1.4,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Option2 Value",
+      "total": 147,
+      "present": 2,
+      "missing": 145,
+      "real": 2,
+      "placeholder": 0,
+      "presentPct": 1.4,
+      "missingPct": 98.6,
+      "realPct": 1.4,
+      "placeholderPct": 0.0
+    },
+    {
       "field": "Variant Barcode",
-      "total": 5,
-      "present": 1,
-      "missing": 4,
-      "real": 1,
+      "total": 147,
+      "present": 60,
+      "missing": 87,
+      "real": 60,
       "placeholder": 0,
-      "presentPct": 20.0,
-      "missingPct": 80.0,
-      "realPct": 20.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Google Shopping / Age Group",
-      "total": 3,
-      "present": 1,
-      "missing": 2,
-      "real": 1,
-      "placeholder": 0,
-      "presentPct": 33.3,
-      "missingPct": 66.7,
-      "realPct": 33.3,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Google Shopping / Gender",
-      "total": 3,
-      "present": 1,
-      "missing": 2,
-      "real": 1,
-      "placeholder": 0,
-      "presentPct": 33.3,
-      "missingPct": 66.7,
-      "realPct": 33.3,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Image Alt Text",
-      "total": 6,
-      "present": 3,
-      "missing": 3,
-      "real": 3,
-      "placeholder": 0,
-      "presentPct": 50.0,
-      "missingPct": 50.0,
-      "realPct": 50.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Image Position",
-      "total": 6,
-      "present": 3,
-      "missing": 3,
-      "real": 3,
-      "placeholder": 0,
-      "presentPct": 50.0,
-      "missingPct": 50.0,
-      "realPct": 50.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Image Src",
-      "total": 6,
-      "present": 3,
-      "missing": 3,
-      "real": 0,
-      "placeholder": 3,
-      "presentPct": 50.0,
-      "missingPct": 50.0,
-      "realPct": 0.0,
-      "placeholderPct": 50.0
-    },
-    {
-      "field": "Google Shopping / Condition",
-      "total": 3,
-      "present": 2,
-      "missing": 1,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 66.7,
-      "missingPct": 33.3,
-      "realPct": 66.7,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Included / International",
-      "total": 3,
-      "present": 2,
-      "missing": 1,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 66.7,
-      "missingPct": 33.3,
-      "realPct": 66.7,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Included / United States",
-      "total": 3,
-      "present": 2,
-      "missing": 1,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 66.7,
-      "missingPct": 33.3,
-      "realPct": 66.7,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Product Category",
-      "total": 3,
-      "present": 2,
-      "missing": 1,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 66.7,
-      "missingPct": 33.3,
-      "realPct": 66.7,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "SEO Description",
-      "total": 3,
-      "present": 2,
-      "missing": 1,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 66.7,
-      "missingPct": 33.3,
-      "realPct": 66.7,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "SEO Title",
-      "total": 3,
-      "present": 2,
-      "missing": 1,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 66.7,
-      "missingPct": 33.3,
-      "realPct": 66.7,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Cost per item",
-      "total": 5,
-      "present": 4,
-      "missing": 1,
-      "real": 4,
-      "placeholder": 0,
-      "presentPct": 80.0,
-      "missingPct": 20.0,
-      "realPct": 80.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Variant Compare At Price",
-      "total": 5,
-      "present": 4,
-      "missing": 1,
-      "real": 4,
-      "placeholder": 0,
-      "presentPct": 80.0,
-      "missingPct": 20.0,
-      "realPct": 80.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Variant Inventory Qty",
-      "total": 5,
-      "present": 4,
-      "missing": 1,
-      "real": 2,
-      "placeholder": 2,
-      "presentPct": 80.0,
-      "missingPct": 20.0,
-      "realPct": 40.0,
-      "placeholderPct": 40.0
-    },
-    {
-      "field": "Variant Inventory Tracker",
-      "total": 5,
-      "present": 4,
-      "missing": 1,
-      "real": 4,
-      "placeholder": 0,
-      "presentPct": 80.0,
-      "missingPct": 20.0,
-      "realPct": 80.0,
+      "presentPct": 40.8,
+      "missingPct": 59.2,
+      "realPct": 40.8,
       "placeholderPct": 0.0
     },
     {
       "field": "Body (HTML)",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -431,10 +528,10 @@
     },
     {
       "field": "Gift Card",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -443,10 +540,70 @@
     },
     {
       "field": "Handle",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Image Alt Text",
+      "total": 444,
+      "present": 444,
+      "missing": 0,
+      "real": 444,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Image Position",
+      "total": 444,
+      "present": 444,
+      "missing": 0,
+      "real": 444,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Image Src",
+      "total": 444,
+      "present": 444,
+      "missing": 0,
+      "real": 444,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Included / International",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Included / United States",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -455,10 +612,10 @@
     },
     {
       "field": "Option1 Name",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -467,10 +624,10 @@
     },
     {
       "field": "Option1 Value",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -479,10 +636,34 @@
     },
     {
       "field": "Published",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "SEO Description",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "SEO Title",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -491,10 +672,10 @@
     },
     {
       "field": "Status",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -503,10 +684,10 @@
     },
     {
       "field": "Tags",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -515,10 +696,10 @@
     },
     {
       "field": "Title",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -527,10 +708,10 @@
     },
     {
       "field": "Type",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -539,10 +720,10 @@
     },
     {
       "field": "Variant Fulfillment Service",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -551,22 +732,46 @@
     },
     {
       "field": "Variant Grams",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 0,
-      "placeholder": 5,
+      "real": 3,
+      "placeholder": 144,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 0.0,
-      "placeholderPct": 100.0
+      "realPct": 2.0,
+      "placeholderPct": 98.0
     },
     {
       "field": "Variant Inventory Policy",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
+      "real": 147,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Variant Inventory Qty",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Variant Inventory Tracker",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -575,22 +780,22 @@
     },
     {
       "field": "Variant Price",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
-      "placeholder": 0,
+      "real": 144,
+      "placeholder": 3,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
+      "realPct": 98.0,
+      "placeholderPct": 2.0
     },
     {
       "field": "Variant Requires Shipping",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -599,10 +804,10 @@
     },
     {
       "field": "Variant SKU",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -611,10 +816,10 @@
     },
     {
       "field": "Variant Taxable",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -623,10 +828,10 @@
     },
     {
       "field": "Variant Weight Unit",
-      "total": 5,
-      "present": 5,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 5,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -635,10 +840,10 @@
     },
     {
       "field": "Vendor",
-      "total": 3,
-      "present": 3,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 3,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -649,9 +854,45 @@
   "topMissing": [
     {
       "field": "Compare At Price / International",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Cost per item",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Age Group",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Condition",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -661,9 +902,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 0",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -673,9 +914,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 1",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -685,9 +926,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 2",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -697,9 +938,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 3",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -709,9 +950,9 @@
     },
     {
       "field": "Google Shopping / Custom Label 4",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -721,9 +962,21 @@
     },
     {
       "field": "Google Shopping / Custom Product",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Gender",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -733,9 +986,9 @@
     },
     {
       "field": "Google Shopping / Google Product Category",
-      "total": 3,
+      "total": 147,
       "present": 0,
-      "missing": 3,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -745,33 +998,9 @@
     },
     {
       "field": "Google Shopping / MPN",
-      "total": 3,
+      "total": 147,
       "present": 0,
-      "missing": 3,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Option2 Name",
-      "total": 5,
-      "present": 0,
-      "missing": 5,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Option2 Value",
-      "total": 5,
-      "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -781,9 +1010,9 @@
     },
     {
       "field": "Option3 Name",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -793,33 +1022,9 @@
     },
     {
       "field": "Option3 Value",
-      "total": 5,
+      "total": 147,
       "present": 0,
-      "missing": 5,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Price / International",
-      "total": 5,
-      "present": 0,
-      "missing": 5,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Variant Image",
-      "total": 5,
-      "present": 0,
-      "missing": 5,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -829,11 +1034,9 @@
     }
   ],
   "statusCounts": {
-    "active": 2,
-    "draft": 1
+    "unlisted": 147
   },
   "publishedCounts": {
-    "true": 2,
-    "false": 1
+    "false": 147
   }
 }

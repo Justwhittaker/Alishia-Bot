@@ -5,35 +5,262 @@
 import { Divider, Grid, H1, H2, Stack, Stat, Table, Text } from "cursor/canvas";
 
 const REPORT = {
-  "sourceCsv": "/workspace/shopify/out/keogh_shopify_unlisted.csv",
+  "sourceCsv": "shopify/out/mullingarpewter_shopify_unlisted.csv",
   "summary": {
-    "totalRows": 2,
-    "products": 2,
-    "productRows": 2,
+    "totalRows": 444,
+    "products": 147,
+    "productRows": 147,
     "variantRows": 0,
-    "imageOnlyRows": 0,
-    "categories": 1,
-    "fieldsTracked": 34,
-    "fieldsFullyPresent": 26,
-    "fieldsWithMissing": 8,
-    "fieldsWithPlaceholders": 4,
-    "fieldsCompleteReal": 22,
-    "unlistedProducts": 2,
-    "publishedFalse": 2
+    "imageOnlyRows": 297,
+    "categories": 44,
+    "fieldsTracked": 51,
+    "fieldsFullyPresent": 28,
+    "fieldsWithMissing": 23,
+    "fieldsWithPlaceholders": 2,
+    "fieldsCompleteReal": 26,
+    "unlistedProducts": 147,
+    "publishedFalse": 147
   },
   "categories": [
     {
-      "category": "General",
+      "category": "Drinkware",
+      "products": 21,
+      "pct": 14.3
+    },
+    {
+      "category": "Gifts for Men",
+      "products": 12,
+      "pct": 8.2
+    },
+    {
+      "category": "Gift",
+      "products": 10,
+      "pct": 6.8
+    },
+    {
+      "category": "Tankard",
+      "products": 9,
+      "pct": 6.1
+    },
+    {
+      "category": "Cross",
+      "products": 9,
+      "pct": 6.1
+    },
+    {
+      "category": "CHESS SET",
+      "products": 8,
+      "pct": 5.4
+    },
+    {
+      "category": "Religious",
+      "products": 6,
+      "pct": 4.1
+    },
+    {
+      "category": "Flask",
+      "products": 5,
+      "pct": 3.4
+    },
+    {
+      "category": "Homeware",
+      "products": 5,
+      "pct": 3.4
+    },
+    {
+      "category": "Baby Gifts",
+      "products": 5,
+      "pct": 3.4
+    },
+    {
+      "category": "Measure",
+      "products": 4,
+      "pct": 2.7
+    },
+    {
+      "category": "Jewellery",
+      "products": 4,
+      "pct": 2.7
+    },
+    {
+      "category": "GIFTS FOR HER",
+      "products": 4,
+      "pct": 2.7
+    },
+    {
+      "category": "Picture Frame",
+      "products": 3,
+      "pct": 2.0
+    },
+    {
+      "category": "FLASK",
+      "products": 3,
+      "pct": 2.0
+    },
+    {
+      "category": "watch set",
+      "products": 3,
+      "pct": 2.0
+    },
+    {
+      "category": "Christmas Tree Ornament",
+      "products": 3,
+      "pct": 2.0
+    },
+    {
+      "category": "gifts for her",
       "products": 2,
-      "pct": 100.0
+      "pct": 1.4
+    },
+    {
+      "category": "Wine",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "MEASURE",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "cross",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "FRAME",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "GOBLETS",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "Wedding",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Sculpture",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Sculptures",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "sports awards and trophies",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "gift",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "jewellery boxes",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "drinkware",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "bookmarks",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Watch",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Gift Card",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Gifts for her",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "frames",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "letter openers",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "BOOKMARK",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "POP SOCKETS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "TUMBLERS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "MENS GIFTS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Bookmarks",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "ORNAMENT",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "CORK SCREW",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "CANDLE HOLDER",
+      "products": 1,
+      "pct": 0.7
     }
   ],
   "fields": [
     {
+      "field": "Compare At Price / International",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
       "field": "Cost per item",
-      "total": 2,
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -42,10 +269,10 @@ const REPORT = {
       "placeholderPct": 0.0
     },
     {
-      "field": "Option2 Name",
-      "total": 2,
+      "field": "Google Shopping / Age Group",
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -54,10 +281,118 @@ const REPORT = {
       "placeholderPct": 0.0
     },
     {
-      "field": "Option2 Value",
-      "total": 2,
+      "field": "Google Shopping / Condition",
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 0",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 1",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 2",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 3",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 4",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Product",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Gender",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Google Product Category",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / MPN",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -67,9 +402,9 @@ const REPORT = {
     },
     {
       "field": "Option3 Name",
-      "total": 2,
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -79,9 +414,21 @@ const REPORT = {
     },
     {
       "field": "Option3 Value",
-      "total": 2,
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Price / International",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -91,21 +438,9 @@ const REPORT = {
     },
     {
       "field": "Product Category",
-      "total": 2,
+      "total": 147,
       "present": 0,
-      "missing": 2,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Variant Barcode",
-      "total": 2,
-      "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -115,9 +450,9 @@ const REPORT = {
     },
     {
       "field": "Variant Compare At Price",
-      "total": 2,
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -126,11 +461,71 @@ const REPORT = {
       "placeholderPct": 0.0
     },
     {
-      "field": "Body (HTML)",
-      "total": 2,
+      "field": "Variant Image",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Variant Tax Code",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Option2 Name",
+      "total": 147,
       "present": 2,
-      "missing": 0,
+      "missing": 145,
       "real": 2,
+      "placeholder": 0,
+      "presentPct": 1.4,
+      "missingPct": 98.6,
+      "realPct": 1.4,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Option2 Value",
+      "total": 147,
+      "present": 2,
+      "missing": 145,
+      "real": 2,
+      "placeholder": 0,
+      "presentPct": 1.4,
+      "missingPct": 98.6,
+      "realPct": 1.4,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Variant Barcode",
+      "total": 147,
+      "present": 60,
+      "missing": 87,
+      "real": 60,
+      "placeholder": 0,
+      "presentPct": 40.8,
+      "missingPct": 59.2,
+      "realPct": 40.8,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Body (HTML)",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -139,10 +534,10 @@ const REPORT = {
     },
     {
       "field": "Gift Card",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -151,10 +546,10 @@ const REPORT = {
     },
     {
       "field": "Handle",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -163,10 +558,10 @@ const REPORT = {
     },
     {
       "field": "Image Alt Text",
-      "total": 2,
-      "present": 2,
+      "total": 444,
+      "present": 444,
       "missing": 0,
-      "real": 2,
+      "real": 444,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -175,10 +570,10 @@ const REPORT = {
     },
     {
       "field": "Image Position",
-      "total": 2,
-      "present": 2,
+      "total": 444,
+      "present": 444,
       "missing": 0,
-      "real": 2,
+      "real": 444,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -187,10 +582,34 @@ const REPORT = {
     },
     {
       "field": "Image Src",
-      "total": 2,
-      "present": 2,
+      "total": 444,
+      "present": 444,
       "missing": 0,
-      "real": 2,
+      "real": 444,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Included / International",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
+      "placeholder": 0,
+      "presentPct": 100.0,
+      "missingPct": 0.0,
+      "realPct": 100.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Included / United States",
+      "total": 147,
+      "present": 147,
+      "missing": 0,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -199,10 +618,10 @@ const REPORT = {
     },
     {
       "field": "Option1 Name",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -211,10 +630,10 @@ const REPORT = {
     },
     {
       "field": "Option1 Value",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -223,10 +642,10 @@ const REPORT = {
     },
     {
       "field": "Published",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -235,22 +654,22 @@ const REPORT = {
     },
     {
       "field": "SEO Description",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 0,
-      "placeholder": 2,
+      "real": 147,
+      "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 0.0,
-      "placeholderPct": 100.0
+      "realPct": 100.0,
+      "placeholderPct": 0.0
     },
     {
       "field": "SEO Title",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -259,10 +678,10 @@ const REPORT = {
     },
     {
       "field": "Status",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -271,10 +690,10 @@ const REPORT = {
     },
     {
       "field": "Tags",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -283,10 +702,10 @@ const REPORT = {
     },
     {
       "field": "Title",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -295,22 +714,22 @@ const REPORT = {
     },
     {
       "field": "Type",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 0,
-      "placeholder": 2,
+      "real": 147,
+      "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 0.0,
-      "placeholderPct": 100.0
+      "realPct": 100.0,
+      "placeholderPct": 0.0
     },
     {
       "field": "Variant Fulfillment Service",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -319,22 +738,22 @@ const REPORT = {
     },
     {
       "field": "Variant Grams",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 0,
-      "placeholder": 2,
+      "real": 3,
+      "placeholder": 144,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 0.0,
-      "placeholderPct": 100.0
+      "realPct": 2.0,
+      "placeholderPct": 98.0
     },
     {
       "field": "Variant Inventory Policy",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -343,22 +762,22 @@ const REPORT = {
     },
     {
       "field": "Variant Inventory Qty",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 0,
-      "placeholder": 2,
+      "real": 147,
+      "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 0.0,
-      "placeholderPct": 100.0
+      "realPct": 100.0,
+      "placeholderPct": 0.0
     },
     {
       "field": "Variant Inventory Tracker",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -367,22 +786,22 @@ const REPORT = {
     },
     {
       "field": "Variant Price",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
-      "placeholder": 0,
+      "real": 144,
+      "placeholder": 3,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
+      "realPct": 98.0,
+      "placeholderPct": 2.0
     },
     {
       "field": "Variant Requires Shipping",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -391,10 +810,10 @@ const REPORT = {
     },
     {
       "field": "Variant SKU",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -403,10 +822,10 @@ const REPORT = {
     },
     {
       "field": "Variant Taxable",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -415,10 +834,10 @@ const REPORT = {
     },
     {
       "field": "Variant Weight Unit",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -427,10 +846,10 @@ const REPORT = {
     },
     {
       "field": "Vendor",
-      "total": 2,
-      "present": 2,
+      "total": 147,
+      "present": 147,
       "missing": 0,
-      "real": 2,
+      "real": 147,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -440,10 +859,22 @@ const REPORT = {
   ],
   "topMissing": [
     {
+      "field": "Compare At Price / International",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
       "field": "Cost per item",
-      "total": 2,
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -452,10 +883,10 @@ const REPORT = {
       "placeholderPct": 0.0
     },
     {
-      "field": "Option2 Name",
-      "total": 2,
+      "field": "Google Shopping / Age Group",
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -464,10 +895,118 @@ const REPORT = {
       "placeholderPct": 0.0
     },
     {
-      "field": "Option2 Value",
-      "total": 2,
+      "field": "Google Shopping / Condition",
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 0",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 1",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 2",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 3",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Label 4",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Custom Product",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Gender",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / Google Product Category",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Google Shopping / MPN",
+      "total": 147,
+      "present": 0,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -477,9 +1016,9 @@ const REPORT = {
     },
     {
       "field": "Option3 Name",
-      "total": 2,
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -489,142 +1028,22 @@ const REPORT = {
     },
     {
       "field": "Option3 Value",
-      "total": 2,
+      "total": 147,
       "present": 0,
-      "missing": 2,
+      "missing": 147,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
       "missingPct": 100.0,
       "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Product Category",
-      "total": 2,
-      "present": 0,
-      "missing": 2,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Variant Barcode",
-      "total": 2,
-      "present": 0,
-      "missing": 2,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Variant Compare At Price",
-      "total": 2,
-      "present": 0,
-      "missing": 2,
-      "real": 0,
-      "placeholder": 0,
-      "presentPct": 0.0,
-      "missingPct": 100.0,
-      "realPct": 0.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Body (HTML)",
-      "total": 2,
-      "present": 2,
-      "missing": 0,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Gift Card",
-      "total": 2,
-      "present": 2,
-      "missing": 0,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Handle",
-      "total": 2,
-      "present": 2,
-      "missing": 0,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Image Alt Text",
-      "total": 2,
-      "present": 2,
-      "missing": 0,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Image Position",
-      "total": 2,
-      "present": 2,
-      "missing": 0,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Image Src",
-      "total": 2,
-      "present": 2,
-      "missing": 0,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Option1 Name",
-      "total": 2,
-      "present": 2,
-      "missing": 0,
-      "real": 2,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
       "placeholderPct": 0.0
     }
   ],
   "statusCounts": {
-    "unlisted": 2
+    "unlisted": 147
   },
   "publishedCounts": {
-    "false": 2
+    "false": 147
   }
 } as const;
 
