@@ -1,7 +1,12 @@
 {
   "source": "https://mullingarpewter.com/",
   "products": 147,
-  "notes": "Variant Taxable=false (exclude VAT); Variant Price = storefront selling price unchanged",
-  "status": "unlisted",
-  "published": "false"
+  "variants_total": 459,
+  "multi_variant_products": 72,
+  "rows": 756,
+  "notes": "All storefront variants expanded; Variant Taxable=false; selling prices from products.json; Status=unlisted Published=false",
+  "files": [
+    "shopify/out/mullingarpewter_shopify_unlisted.csv",
+    "shopify/out/mullingarpewter_shopify_unlisted_variants.csv"
+  ]
 }
