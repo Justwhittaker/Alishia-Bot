@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-from collections import Counter, OrderedDict
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -42,20 +42,48 @@ def analyze(path: Path) -> dict[str, Any]:
 
     columns = list(rows[0].keys())
     product_rows = [r for r in rows if (r.get("Title") or "").strip()]
+
+    def has_variant_price(row: dict[str, str]) -> bool:
+        return bool((row.get("Variant Price") or "").strip())
+
+    # Variant continuation rows: no Title, but priced (extra SKUs/options)
+    variant_extra_rows = [
+        r
+        for r in rows
+        if not (r.get("Title") or "").strip() and has_variant_price(r)
+    ]
+    # Any row that carries a selling price is a variant (includes product row)
+    variant_priced_rows = [r for r in rows if has_variant_price(r)]
     image_only_rows = [
         r
         for r in rows
-        if not (r.get("Title") or "").strip() and (r.get("Image Src") or "").strip()
-    ]
-    variant_rows = [
-        r
-        for r in rows
         if not (r.get("Title") or "").strip()
-        and (r.get("Option1 Value") or "").strip()
-        and not (r.get("Image Src") or "").strip()
+        and not has_variant_price(r)
+        and (r.get("Image Src") or "").strip()
     ]
+    # Backward-compatible alias used in older summaries
+    variant_rows = variant_extra_rows
 
     handles = {(r.get("Handle") or "").strip() for r in rows if (r.get("Handle") or "").strip()}
+    variants_per_handle: Counter[str] = Counter()
+    for r in variant_priced_rows:
+        h = (r.get("Handle") or "").strip()
+        if h:
+            variants_per_handle[h] += 1
+    multi_variant_products = sum(1 for _h, count in variants_per_handle.items() if count > 1)
+    single_variant_products = sum(1 for _h, count in variants_per_handle.items() if count == 1)
+    max_variants = max(variants_per_handle.values()) if variants_per_handle else 0
+    avg_variants = (
+        round(sum(variants_per_handle.values()) / len(variants_per_handle), 2)
+        if variants_per_handle
+        else 0.0
+    )
+    top_multi = [
+        {"handle": handle, "variants": count}
+        for handle, count in variants_per_handle.most_common(15)
+        if count > 1
+    ]
+
     categories = sorted(
         {
             (r.get("Product Category") or r.get("Type") or "").strip()
@@ -69,7 +97,7 @@ def analyze(path: Path) -> dict[str, Any]:
     )
 
     # Field coverage measured on product rows (first row per product) for product-level
-    # fields, and on all non-image-only rows for variant fields.
+    # fields, and on all variant-priced rows for variant fields.
     product_level = {
         "Handle",
         "Title",
@@ -92,19 +120,42 @@ def analyze(path: Path) -> dict[str, Any]:
         "Included / International",
     }
 
-    non_image_only = [
-        r
-        for r in rows
-        if (r.get("Title") or "").strip()
-        or (r.get("Option1 Value") or "").strip()
-        or not (r.get("Image Src") or "").strip()
-    ]
+    variant_level = {
+        "Option1 Name",
+        "Option1 Value",
+        "Option2 Name",
+        "Option2 Value",
+        "Option3 Name",
+        "Option3 Value",
+        "Variant SKU",
+        "Variant Grams",
+        "Variant Inventory Tracker",
+        "Variant Inventory Qty",
+        "Variant Inventory Policy",
+        "Variant Fulfillment Service",
+        "Variant Price",
+        "Variant Compare At Price",
+        "Variant Requires Shipping",
+        "Variant Taxable",
+        "Variant Barcode",
+        "Variant Image",
+        "Variant Weight Unit",
+        "Variant Tax Code",
+        "Cost per item",
+        "Price / International",
+        "Compare At Price / International",
+    }
 
     fields: list[dict[str, Any]] = []
     for column in columns:
-        sample = product_rows if column in product_level else non_image_only
-        if column.startswith("Image ") or column == "Image Src":
+        if column in product_level:
+            sample = product_rows
+        elif column.startswith("Image ") or column == "Image Src":
             sample = rows
+        elif column in variant_level:
+            sample = variant_priced_rows or product_rows
+        else:
+            sample = product_rows
         total = len(sample) or len(rows)
         present = 0
         missing = 0
@@ -142,6 +193,9 @@ def analyze(path: Path) -> dict[str, Any]:
 
     status_values = Counter((r.get("Status") or "").strip().lower() for r in product_rows)
     published_values = Counter((r.get("Published") or "").strip().lower() for r in product_rows)
+    taxable_values = Counter(
+        (r.get("Variant Taxable") or "").strip().lower() for r in variant_priced_rows
+    )
 
     report = {
         "sourceCsv": str(path),
@@ -149,7 +203,13 @@ def analyze(path: Path) -> dict[str, Any]:
             "totalRows": len(rows),
             "products": len(handles) if handles else len(product_rows),
             "productRows": len(product_rows),
+            "variants": len(variant_priced_rows),
             "variantRows": len(variant_rows),
+            "variantExtraRows": len(variant_extra_rows),
+            "multiVariantProducts": multi_variant_products,
+            "singleVariantProducts": single_variant_products,
+            "avgVariantsPerProduct": avg_variants,
+            "maxVariantsOnProduct": max_variants,
             "imageOnlyRows": len(image_only_rows),
             "categories": len(categories),
             "fieldsTracked": len(columns),
@@ -159,6 +219,16 @@ def analyze(path: Path) -> dict[str, Any]:
             "fieldsCompleteReal": len(complete_fields),
             "unlistedProducts": status_values.get("unlisted", 0),
             "publishedFalse": published_values.get("false", 0),
+            "taxableFalse": taxable_values.get("false", 0),
+        },
+        "variants": {
+            "total": len(variant_priced_rows),
+            "extraRows": len(variant_extra_rows),
+            "multiVariantProducts": multi_variant_products,
+            "singleVariantProducts": single_variant_products,
+            "avgPerProduct": avg_variants,
+            "maxOnProduct": max_variants,
+            "topMultiVariant": top_multi,
         },
         "categories": [
             {"category": name, "products": count, "pct": round(100 * count / max(len(product_rows), 1), 1)}
@@ -168,6 +238,7 @@ def analyze(path: Path) -> dict[str, Any]:
         "topMissing": fields_sorted[:15],
         "statusCounts": dict(status_values),
         "publishedCounts": dict(published_values),
+        "taxableCounts": dict(taxable_values),
     }
     return report
 
@@ -215,16 +286,30 @@ export default function ShopifyScrapeMetrics() {{
 
       <Grid columns={{4}} gap={{12}}>
         <Stat value={{String(s.products)}} label="Products" />
-        <Stat value={{String(s.categories)}} label="Categories" />
-        <Stat value={{String(s.fieldsWithMissing)}} label="Fields with missing" />
+        <Stat value={{String(s.variants ?? s.variantRows)}} label="Variants" />
+        <Stat value={{String(s.multiVariantProducts ?? 0)}} label="Multi-variant products" />
         <Stat value={{String(s.unlistedProducts)}} label="Unlisted products" />
       </Grid>
 
+      <Grid columns={{4}} gap={{12}}>
+        <Stat value={{String(s.categories)}} label="Categories" />
+        <Stat value={{String(s.fieldsWithMissing)}} label="Fields with missing" />
+        <Stat value={{String(s.avgVariantsPerProduct ?? 0)}} label="Avg variants / product" />
+        <Stat value={{String(s.taxableFalse ?? 0)}} label="Taxable=false rows" />
+      </Grid>
+
       <Text>
-        Rows {{s.totalRows}} · product {{s.productRows}} · variant {{s.variantRows}} · image-only {{s.imageOnlyRows}} ·
-        Published=false {{s.publishedFalse}} · fields tracked {{s.fieldsTracked}} ·
+        Rows {{s.totalRows}} · product {{s.productRows}} · variant extras {{s.variantExtraRows ?? s.variantRows}} ·
+        image-only {{s.imageOnlyRows}} · Published=false {{s.publishedFalse}} · fields tracked {{s.fieldsTracked}} ·
         placeholder fields {{s.fieldsWithPlaceholders}}
       </Text>
+
+      <Divider />
+      <H2>Top multi-variant products</H2>
+      <Table
+        headers={{["Handle", "Variants"]}}
+        rows={{(REPORT.variants?.topMultiVariant ?? []).map((v) => [v.handle, String(v.variants)])}}
+      />
 
       <Divider />
       <H2>Categories</H2>
@@ -284,11 +369,17 @@ th{{background:#0f4c3a;color:#fff}} .stats span{{display:inline-block;background
 <p class="muted">{report['sourceCsv']}</p>
 <div class="stats">
 <span><b>{s['products']}</b><br/>Products</span>
+<span><b>{s.get('variants', s.get('variantRows', 0))}</b><br/>Variants</span>
+<span><b>{s.get('multiVariantProducts', 0)}</b><br/>Multi-variant</span>
+<span><b>{s['unlistedProducts']}</b><br/>Unlisted</span>
 <span><b>{s['categories']}</b><br/>Categories</span>
 <span><b>{s['fieldsWithMissing']}</b><br/>Fields with missing</span>
-<span><b>{s['unlistedProducts']}</b><br/>Unlisted</span>
 </div>
-<p>Rows {s['totalRows']} · product {s['productRows']} · variant {s['variantRows']} · image-only {s['imageOnlyRows']} · Published=false {s['publishedFalse']}</p>
+<p>Rows {s['totalRows']} · product {s['productRows']} · variant extras {s.get('variantExtraRows', s.get('variantRows', 0))} · image-only {s['imageOnlyRows']} · avg variants {s.get('avgVariantsPerProduct', 0)} · Published=false {s['publishedFalse']} · Taxable=false {s.get('taxableFalse', 0)}</p>
+<h2>Top multi-variant products</h2>
+<table><thead><tr><th>Handle</th><th>Variants</th></tr></thead><tbody>
+{''.join(f"<tr><td>{v['handle']}</td><td>{v['variants']}</td></tr>" for v in report.get('variants', {}).get('topMultiVariant', []))}
+</tbody></table>
 <h2>Categories</h2>
 <table><thead><tr><th>Category</th><th>Products</th><th>Share</th></tr></thead><tbody>{cat_rows}</tbody></table>
 <h2>All fields — present vs missing</h2>

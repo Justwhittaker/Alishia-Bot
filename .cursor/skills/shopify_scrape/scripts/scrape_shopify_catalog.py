@@ -87,6 +87,22 @@ IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
 
 
 @dataclass
+class Variant:
+    """One Shopify variant row (size/design/SKU/price)."""
+
+    option1_value: str = "Default Title"
+    option2_value: str = ""
+    option3_value: str = ""
+    sku: str = ""
+    grams: str = "0"
+    inventory_qty: str = "0"
+    price: str = "0.00"
+    compare_at: str = ""
+    barcode: str = ""
+    requires_shipping: str = "true"
+
+
+@dataclass
 class Product:
     handle: str = ""
     title: str = ""
@@ -121,6 +137,8 @@ class Product:
     requires_shipping: str = "true"
     taxable: str = "false"  # no VAT / no tax on all Shopify CSVs going forward
     source_url: str = ""
+    # Full variant list when known (Shopify .json). Empty → single variant from fields above.
+    variants: list[Variant] = field(default_factory=list)
 
 
 @dataclass
@@ -128,6 +146,8 @@ class ScrapeReport:
     seed_url: str
     product_urls_found: int = 0
     products_scraped: int = 0
+    variants_written: int = 0
+    multi_variant_products: int = 0
     rows_written: int = 0
     images_kept: int = 0
     images_replaced: int = 0
@@ -601,28 +621,53 @@ def parse_product_page(
                 tags = payload["tags"]
                 product.tags = ", ".join(tags) if isinstance(tags, list) else str(tags)
             variants = payload.get("variants") or []
+            options = payload.get("options") or []
+            if options:
+                product.option1_name = str(options[0].get("name") or "Title")
+                if len(options) > 1:
+                    product.option2_name = str(options[1].get("name") or "")
+                if len(options) > 2:
+                    product.option3_name = str(options[2].get("name") or "")
             if variants:
-                variant = variants[0]
-                product.price = money(variant.get("price")) or product.price
-                product.compare_at = money(variant.get("compare_at_price"))
-                product.sku = str(variant.get("sku") or product.sku)
-                product.barcode = str(variant.get("barcode") or "")
-                grams = variant.get("grams")
-                if grams is not None:
-                    product.grams = str(int(grams))
-                product.requires_shipping = "true" if variant.get("requires_shipping", True) else "false"
+                # ALWAYS export every storefront variant (not just variants[0]).
+                product.variants = []
+                for variant in variants:
+                    qty_raw = variant.get("inventory_quantity")
+                    try:
+                        qty_i = int(qty_raw) if qty_raw is not None else 0
+                    except (TypeError, ValueError):
+                        qty_i = 0
+                    grams = variant.get("grams")
+                    product.variants.append(
+                        Variant(
+                            option1_value=str(variant.get("option1") or variant.get("title") or "Default Title"),
+                            option2_value=str(variant.get("option2") or ""),
+                            option3_value=str(variant.get("option3") or ""),
+                            sku=str(variant.get("sku") or ""),
+                            grams=str(int(grams)) if grams is not None else "0",
+                            inventory_qty=str(max(0, qty_i)),
+                            price=money(variant.get("price")) or "0.00",
+                            compare_at=money(variant.get("compare_at_price")),
+                            barcode=str(variant.get("barcode") or ""),
+                            requires_shipping=(
+                                "true" if variant.get("requires_shipping", True) else "false"
+                            ),
+                        )
+                    )
+                # Keep product-level convenience fields synced to first variant
+                first = product.variants[0]
+                product.price = first.price
+                product.compare_at = first.compare_at
+                product.sku = first.sku
+                product.barcode = first.barcode
+                product.grams = first.grams
+                product.inventory_qty = first.inventory_qty
+                product.option1_value = first.option1_value
+                product.option2_value = first.option2_value
+                product.option3_value = first.option3_value
+                product.requires_shipping = first.requires_shipping
                 # Always no VAT / no tax on exported Shopify CSVs
                 product.taxable = "false"
-                options = payload.get("options") or []
-                if options:
-                    product.option1_name = str(options[0].get("name") or "Title")
-                    product.option1_value = str(variant.get("option1") or "Default Title")
-                    if len(options) > 1:
-                        product.option2_name = str(options[1].get("name") or "")
-                        product.option2_value = str(variant.get("option2") or "")
-                    if len(options) > 2:
-                        product.option3_name = str(options[2].get("name") or "")
-                        product.option3_value = str(variant.get("option3") or "")
             images_json = payload.get("images") or []
             json_images = [str(img.get("src")) for img in images_json if img.get("src")]
             if json_images:
@@ -646,55 +691,86 @@ def parse_product_page(
 
 
 def product_to_rows(product: Product) -> list[dict[str, str]]:
+    """Emit Shopify CSV rows: all variants, then extra image-only rows.
+
+    Shopify import format:
+    - First row carries product fields + first variant (+ image position 1)
+    - Additional variants share Handle; Title/Body blank; Option*/Variant* filled
+    - Extra images are image-only rows (no Variant Price)
+    """
     rows: list[dict[str, str]] = []
-    first = {h: "" for h in TEMPLATE_HEADERS}
-    first.update(
-        {
-            "Handle": product.handle,
-            "Title": product.title,
-            "Body (HTML)": product.body_html,
-            "Vendor": product.vendor,
-            "Product Category": product.product_category or product.google_category,
-            "Type": product.product_type,
-            "Tags": product.tags,
-            "Published": "false",
-            "Status": "unlisted",
-            "Option1 Name": product.option1_name or "Title",
-            "Option1 Value": product.option1_value or "Default Title",
-            "Option2 Name": product.option2_name,
-            "Option2 Value": product.option2_value,
-            "Option3 Name": product.option3_name,
-            "Option3 Value": product.option3_value,
-            "Variant SKU": product.sku,
-            "Variant Grams": product.grams or "0",
-            "Variant Inventory Tracker": "shopify",
-            "Variant Inventory Qty": product.inventory_qty or "0",
-            "Variant Inventory Policy": "deny",
-            "Variant Fulfillment Service": "manual",
-            "Variant Price": product.price or "0.00",
-            "Variant Compare At Price": product.compare_at,
-            "Variant Requires Shipping": product.requires_shipping,
-            "Variant Taxable": "false",  # always no VAT / no tax
-            "Variant Barcode": product.barcode,
-            "Image Src": product.images[0] if product.images else PLACEHOLDER_IMAGE,
-            "Image Position": "1",
-            "Image Alt Text": product.image_alt or product.title,
-            "Gift Card": "false",
-            "SEO Title": product.seo_title or product.title[:70],
-            "SEO Description": product.seo_description,
-            "Google Shopping / Google Product Category": product.google_category,
-            "Google Shopping / Gender": product.google_gender,
-            "Google Shopping / Age Group": product.google_age_group,
-            "Google Shopping / MPN": product.google_mpn,
-            "Google Shopping / Condition": product.google_condition,
-            "Variant Weight Unit": product.weight_unit or "g",
-            "Cost per item": product.cost,
-            "Included / United States": "true",
-            "Included / International": "true",
-        }
-    )
-    rows.append(first)
-    for index, image in enumerate(product.images[1:], start=2):
+    variants = list(product.variants)
+    if not variants:
+        variants = [
+            Variant(
+                option1_value=product.option1_value or "Default Title",
+                option2_value=product.option2_value,
+                option3_value=product.option3_value,
+                sku=product.sku,
+                grams=product.grams or "0",
+                inventory_qty=product.inventory_qty or "0",
+                price=product.price or "0.00",
+                compare_at=product.compare_at,
+                barcode=product.barcode,
+                requires_shipping=product.requires_shipping or "true",
+            )
+        ]
+
+    for index, variant in enumerate(variants):
+        row = {h: "" for h in TEMPLATE_HEADERS}
+        row.update(
+            {
+                "Handle": product.handle,
+                "Published": "false",
+                "Status": "unlisted",
+                "Option1 Value": variant.option1_value or "Default Title",
+                "Option2 Value": variant.option2_value,
+                "Option3 Value": variant.option3_value,
+                "Variant SKU": variant.sku,
+                "Variant Grams": variant.grams or "0",
+                "Variant Inventory Tracker": "shopify",
+                "Variant Inventory Qty": variant.inventory_qty or "0",
+                "Variant Inventory Policy": "deny",
+                "Variant Fulfillment Service": "manual",
+                "Variant Price": variant.price or "0.00",
+                "Variant Compare At Price": variant.compare_at,
+                "Variant Requires Shipping": variant.requires_shipping or "true",
+                "Variant Taxable": "false",  # always no VAT / no tax
+                "Variant Barcode": variant.barcode,
+                "Variant Weight Unit": product.weight_unit or "g",
+            }
+        )
+        if index == 0:
+            row.update(
+                {
+                    "Title": product.title,
+                    "Body (HTML)": product.body_html,
+                    "Vendor": product.vendor,
+                    "Product Category": product.product_category or product.google_category,
+                    "Type": product.product_type,
+                    "Tags": product.tags,
+                    "Option1 Name": product.option1_name or "Title",
+                    "Option2 Name": product.option2_name,
+                    "Option3 Name": product.option3_name,
+                    "Image Src": product.images[0] if product.images else PLACEHOLDER_IMAGE,
+                    "Image Position": "1",
+                    "Image Alt Text": product.image_alt or product.title,
+                    "Gift Card": "false",
+                    "SEO Title": product.seo_title or product.title[:70],
+                    "SEO Description": product.seo_description,
+                    "Google Shopping / Google Product Category": product.google_category,
+                    "Google Shopping / Gender": product.google_gender,
+                    "Google Shopping / Age Group": product.google_age_group,
+                    "Google Shopping / MPN": product.google_mpn,
+                    "Google Shopping / Condition": product.google_condition,
+                    "Cost per item": product.cost,
+                    "Included / United States": "true",
+                    "Included / International": "true",
+                }
+            )
+        rows.append(row)
+
+    for img_index, image in enumerate(product.images[1:], start=2):
         extra = {h: "" for h in TEMPLATE_HEADERS}
         extra.update(
             {
@@ -702,12 +778,18 @@ def product_to_rows(product: Product) -> list[dict[str, str]]:
                 "Published": "false",
                 "Status": "unlisted",
                 "Image Src": image,
-                "Image Position": str(index),
+                "Image Position": str(img_index),
                 "Image Alt Text": product.image_alt or product.title,
             }
         )
         rows.append(extra)
     return rows
+
+
+def product_to_rows_stats(product: Product) -> tuple[int, bool]:
+    """Return (variant_count, is_multi_variant) for reporting."""
+    count = len(product.variants) if product.variants else 1
+    return count, count > 1
 
 
 def scrape(
@@ -754,8 +836,13 @@ def scrape(
             rows = product_to_rows(product)
             all_rows.extend(rows)
             report.products_scraped += 1
+            variant_count, is_multi = product_to_rows_stats(product)
+            report.variants_written += variant_count
+            if is_multi:
+                report.multi_variant_products += 1
             report.rows_written += len(rows)
-            log(f"[{index}/{len(product_urls)}] {product.title} → {product.handle}")
+            multi_note = f" ({variant_count} variants)" if is_multi else ""
+            log(f"[{index}/{len(product_urls)}] {product.title} → {product.handle}{multi_note}")
         except Exception as exc:  # noqa: BLE001
             report.warnings.append(f"failed {product_url}: {exc}")
             print(f"[{index}/{len(product_urls)}] FAIL {product_url}: {exc}", file=sys.stderr, flush=True)
@@ -775,6 +862,8 @@ def scrape(
                 "seed_url": report.seed_url,
                 "product_urls_found": report.product_urls_found,
                 "products_scraped": report.products_scraped,
+                "variants_written": report.variants_written,
+                "multi_variant_products": report.multi_variant_products,
                 "rows_written": report.rows_written,
                 "images_kept": report.images_kept,
                 "images_replaced": report.images_replaced,
@@ -835,10 +924,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     log(f"Wrote {args.output}")
     log(
-        f"URLs found: {report.product_urls_found} | scraped: {report.products_scraped} | rows: {report.rows_written}"
+        f"URLs found: {report.product_urls_found} | scraped: {report.products_scraped} | "
+        f"variants: {report.variants_written} | multi-variant products: {report.multi_variant_products} | "
+        f"rows: {report.rows_written}"
     )
     log(f"Images kept: {report.images_kept} | placeholder replacements: {report.images_replaced}")
-    log("Status forced to unlisted; Published forced to false")
+    log("Status forced to unlisted; Published forced to false; Taxable forced to false")
+    log("All discovered variants exported (not first-variant-only)")
     if report.warnings:
         log(f"Warnings: {len(report.warnings)} (see {args.output.with_suffix('.meta.json')})")
     return 0 if report.products_scraped else 2

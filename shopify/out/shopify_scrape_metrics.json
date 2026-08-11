@@ -1,19 +1,96 @@
 {
   "sourceCsv": "shopify/out/mullingarpewter_shopify_unlisted.csv",
   "summary": {
-    "totalRows": 444,
+    "totalRows": 756,
     "products": 147,
     "productRows": 147,
-    "variantRows": 0,
+    "variants": 459,
+    "variantRows": 312,
+    "variantExtraRows": 312,
+    "multiVariantProducts": 72,
+    "singleVariantProducts": 75,
+    "avgVariantsPerProduct": 3.12,
+    "maxVariantsOnProduct": 30,
     "imageOnlyRows": 297,
     "categories": 44,
     "fieldsTracked": 51,
-    "fieldsFullyPresent": 28,
-    "fieldsWithMissing": 23,
-    "fieldsWithPlaceholders": 2,
-    "fieldsCompleteReal": 26,
+    "fieldsFullyPresent": 23,
+    "fieldsWithMissing": 28,
+    "fieldsWithPlaceholders": 3,
+    "fieldsCompleteReal": 20,
     "unlistedProducts": 147,
-    "publishedFalse": 147
+    "publishedFalse": 147,
+    "taxableFalse": 459
+  },
+  "variants": {
+    "total": 459,
+    "extraRows": 312,
+    "multiVariantProducts": 72,
+    "singleVariantProducts": 75,
+    "avgPerProduct": 3.12,
+    "maxOnProduct": 30,
+    "topMultiVariant": [
+      {
+        "handle": "unisex-leather-like-wristband-with-irish-pewter-design",
+        "variants": 30
+      },
+      {
+        "handle": "gents-mechanical-pocket-watch-collection",
+        "variants": 23
+      },
+      {
+        "handle": "corkscrew-bottle-opener-collection",
+        "variants": 14
+      },
+      {
+        "handle": "stainless-steel-flask-with-pewter-design-collection",
+        "variants": 14
+      },
+      {
+        "handle": "glass-shot-glasses-with-pewter-embellishment",
+        "variants": 13
+      },
+      {
+        "handle": "irish-pewter-wine-stopper",
+        "variants": 12
+      },
+      {
+        "handle": "glass-beer-tankard-with-pewter-design",
+        "variants": 11
+      },
+      {
+        "handle": "irish-pewter-jewelry-boxes-mom-design-claddagh-or-plain",
+        "variants": 9
+      },
+      {
+        "handle": "money-clip-easter-rising-centenary",
+        "variants": 8
+      },
+      {
+        "handle": "drink-flask-with-pewter-embellishment",
+        "variants": 7
+      },
+      {
+        "handle": "traditional-christmas-decoration-collection",
+        "variants": 7
+      },
+      {
+        "handle": "classic-christmas-collection",
+        "variants": 7
+      },
+      {
+        "handle": "irish-christmas-collection",
+        "variants": 7
+      },
+      {
+        "handle": "pop-socket-phone-holders-worldwide-shipping-included",
+        "variants": 7
+      },
+      {
+        "handle": "ladies-pendant-watch-irish-designs",
+        "variants": 6
+      }
+    ]
   },
   "categories": [
     {
@@ -52,11 +129,6 @@
       "pct": 4.1
     },
     {
-      "category": "Flask",
-      "products": 5,
-      "pct": 3.4
-    },
-    {
       "category": "Homeware",
       "products": 5,
       "pct": 3.4
@@ -65,6 +137,16 @@
       "category": "Baby Gifts",
       "products": 5,
       "pct": 3.4
+    },
+    {
+      "category": "Flask",
+      "products": 5,
+      "pct": 3.4
+    },
+    {
+      "category": "GIFTS FOR HER",
+      "products": 4,
+      "pct": 2.7
     },
     {
       "category": "Measure",
@@ -77,12 +159,7 @@
       "pct": 2.7
     },
     {
-      "category": "GIFTS FOR HER",
-      "products": 4,
-      "pct": 2.7
-    },
-    {
-      "category": "Picture Frame",
+      "category": "watch set",
       "products": 3,
       "pct": 2.0
     },
@@ -92,7 +169,7 @@
       "pct": 2.0
     },
     {
-      "category": "watch set",
+      "category": "Picture Frame",
       "products": 3,
       "pct": 2.0
     },
@@ -102,7 +179,12 @@
       "pct": 2.0
     },
     {
-      "category": "gifts for her",
+      "category": "MEASURE",
+      "products": 2,
+      "pct": 1.4
+    },
+    {
+      "category": "GOBLETS",
       "products": 2,
       "pct": 1.4
     },
@@ -112,7 +194,7 @@
       "pct": 1.4
     },
     {
-      "category": "MEASURE",
+      "category": "gifts for her",
       "products": 2,
       "pct": 1.4
     },
@@ -127,17 +209,92 @@
       "pct": 1.4
     },
     {
-      "category": "GOBLETS",
-      "products": 2,
-      "pct": 1.4
-    },
-    {
-      "category": "Wedding",
+      "category": "Sculpture",
       "products": 1,
       "pct": 0.7
     },
     {
-      "category": "Sculpture",
+      "category": "CORK SCREW",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "MENS GIFTS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Watch",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "gift",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "TUMBLERS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "ORNAMENT",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "CANDLE HOLDER",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "drinkware",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Bookmarks",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "POP SOCKETS",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "BOOKMARK",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "letter openers",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Gift Card",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "frames",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "Gifts for her",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "bookmarks",
+      "products": 1,
+      "pct": 0.7
+    },
+    {
+      "category": "jewellery boxes",
       "products": 1,
       "pct": 0.7
     },
@@ -152,87 +309,7 @@
       "pct": 0.7
     },
     {
-      "category": "gift",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "jewellery boxes",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "drinkware",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "bookmarks",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "Watch",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "Gift Card",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "Gifts for her",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "frames",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "letter openers",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "BOOKMARK",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "POP SOCKETS",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "TUMBLERS",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "MENS GIFTS",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "Bookmarks",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "ORNAMENT",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "CORK SCREW",
-      "products": 1,
-      "pct": 0.7
-    },
-    {
-      "category": "CANDLE HOLDER",
+      "category": "Wedding",
       "products": 1,
       "pct": 0.7
     }
@@ -240,9 +317,9 @@
   "fields": [
     {
       "field": "Compare At Price / International",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -252,9 +329,9 @@
     },
     {
       "field": "Cost per item",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -396,9 +473,9 @@
     },
     {
       "field": "Option3 Name",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -408,9 +485,9 @@
     },
     {
       "field": "Option3 Value",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -420,9 +497,9 @@
     },
     {
       "field": "Price / International",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -443,10 +520,22 @@
       "placeholderPct": 0.0
     },
     {
-      "field": "Variant Compare At Price",
-      "total": 147,
+      "field": "Variant Barcode",
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
+      "real": 0,
+      "placeholder": 0,
+      "presentPct": 0.0,
+      "missingPct": 100.0,
+      "realPct": 0.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Variant Compare At Price",
+      "total": 459,
+      "present": 0,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -456,9 +545,9 @@
     },
     {
       "field": "Variant Image",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -468,9 +557,9 @@
     },
     {
       "field": "Variant Tax Code",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -480,38 +569,86 @@
     },
     {
       "field": "Option2 Name",
-      "total": 147,
+      "total": 459,
       "present": 2,
-      "missing": 145,
+      "missing": 457,
       "real": 2,
       "placeholder": 0,
-      "presentPct": 1.4,
-      "missingPct": 98.6,
-      "realPct": 1.4,
+      "presentPct": 0.4,
+      "missingPct": 99.6,
+      "realPct": 0.4,
       "placeholderPct": 0.0
     },
     {
       "field": "Option2 Value",
-      "total": 147,
-      "present": 2,
-      "missing": 145,
-      "real": 2,
+      "total": 459,
+      "present": 39,
+      "missing": 420,
+      "real": 39,
       "placeholder": 0,
-      "presentPct": 1.4,
-      "missingPct": 98.6,
-      "realPct": 1.4,
+      "presentPct": 8.5,
+      "missingPct": 91.5,
+      "realPct": 8.5,
       "placeholderPct": 0.0
     },
     {
-      "field": "Variant Barcode",
-      "total": 147,
-      "present": 60,
-      "missing": 87,
-      "real": 60,
+      "field": "Option1 Name",
+      "total": 459,
+      "present": 147,
+      "missing": 312,
+      "real": 147,
       "placeholder": 0,
-      "presentPct": 40.8,
-      "missingPct": 59.2,
-      "realPct": 40.8,
+      "presentPct": 32.0,
+      "missingPct": 68.0,
+      "realPct": 32.0,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Image Alt Text",
+      "total": 756,
+      "present": 444,
+      "missing": 312,
+      "real": 444,
+      "placeholder": 0,
+      "presentPct": 58.7,
+      "missingPct": 41.3,
+      "realPct": 58.7,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Image Position",
+      "total": 756,
+      "present": 444,
+      "missing": 312,
+      "real": 444,
+      "placeholder": 0,
+      "presentPct": 58.7,
+      "missingPct": 41.3,
+      "realPct": 58.7,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Image Src",
+      "total": 756,
+      "present": 444,
+      "missing": 312,
+      "real": 444,
+      "placeholder": 0,
+      "presentPct": 58.7,
+      "missingPct": 41.3,
+      "realPct": 58.7,
+      "placeholderPct": 0.0
+    },
+    {
+      "field": "Variant SKU",
+      "total": 459,
+      "present": 454,
+      "missing": 5,
+      "real": 454,
+      "placeholder": 0,
+      "presentPct": 98.9,
+      "missingPct": 1.1,
+      "realPct": 98.9,
       "placeholderPct": 0.0
     },
     {
@@ -551,42 +688,6 @@
       "placeholderPct": 0.0
     },
     {
-      "field": "Image Alt Text",
-      "total": 444,
-      "present": 444,
-      "missing": 0,
-      "real": 444,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Image Position",
-      "total": 444,
-      "present": 444,
-      "missing": 0,
-      "real": 444,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Image Src",
-      "total": 444,
-      "present": 444,
-      "missing": 0,
-      "real": 444,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
       "field": "Included / International",
       "total": 147,
       "present": 147,
@@ -611,23 +712,11 @@
       "placeholderPct": 0.0
     },
     {
-      "field": "Option1 Name",
-      "total": 147,
-      "present": 147,
-      "missing": 0,
-      "real": 147,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
       "field": "Option1 Value",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 147,
+      "real": 459,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -720,10 +809,10 @@
     },
     {
       "field": "Variant Fulfillment Service",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 147,
+      "real": 459,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -732,22 +821,22 @@
     },
     {
       "field": "Variant Grams",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 3,
-      "placeholder": 144,
+      "real": 39,
+      "placeholder": 420,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 2.0,
-      "placeholderPct": 98.0
+      "realPct": 8.5,
+      "placeholderPct": 91.5
     },
     {
       "field": "Variant Inventory Policy",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 147,
+      "real": 459,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -756,22 +845,22 @@
     },
     {
       "field": "Variant Inventory Qty",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 147,
-      "placeholder": 0,
+      "real": 0,
+      "placeholder": 459,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
+      "realPct": 0.0,
+      "placeholderPct": 100.0
     },
     {
       "field": "Variant Inventory Tracker",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 147,
+      "real": 459,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -780,34 +869,22 @@
     },
     {
       "field": "Variant Price",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 144,
-      "placeholder": 3,
+      "real": 451,
+      "placeholder": 8,
       "presentPct": 100.0,
       "missingPct": 0.0,
-      "realPct": 98.0,
-      "placeholderPct": 2.0
+      "realPct": 98.3,
+      "placeholderPct": 1.7
     },
     {
       "field": "Variant Requires Shipping",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 147,
-      "placeholder": 0,
-      "presentPct": 100.0,
-      "missingPct": 0.0,
-      "realPct": 100.0,
-      "placeholderPct": 0.0
-    },
-    {
-      "field": "Variant SKU",
-      "total": 147,
-      "present": 147,
-      "missing": 0,
-      "real": 147,
+      "real": 459,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -816,10 +893,10 @@
     },
     {
       "field": "Variant Taxable",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 147,
+      "real": 459,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -828,10 +905,10 @@
     },
     {
       "field": "Variant Weight Unit",
-      "total": 147,
-      "present": 147,
+      "total": 459,
+      "present": 459,
       "missing": 0,
-      "real": 147,
+      "real": 459,
       "placeholder": 0,
       "presentPct": 100.0,
       "missingPct": 0.0,
@@ -854,9 +931,9 @@
   "topMissing": [
     {
       "field": "Compare At Price / International",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -866,9 +943,9 @@
     },
     {
       "field": "Cost per item",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -1010,9 +1087,9 @@
     },
     {
       "field": "Option3 Name",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -1022,9 +1099,9 @@
     },
     {
       "field": "Option3 Value",
-      "total": 147,
+      "total": 459,
       "present": 0,
-      "missing": 147,
+      "missing": 459,
       "real": 0,
       "placeholder": 0,
       "presentPct": 0.0,
@@ -1038,5 +1115,8 @@
   },
   "publishedCounts": {
     "false": 147
+  },
+  "taxableCounts": {
+    "false": 459
   }
 }

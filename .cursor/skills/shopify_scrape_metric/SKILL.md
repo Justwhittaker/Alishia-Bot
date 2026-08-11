@@ -16,10 +16,12 @@ When Justin runs **`/shopify_scrape_metric`**, analyze a Shopify-template scrape
 CSV and refresh an interactive canvas that shows:
 
 - number of **products** scraped
+- number of **variants** (all priced rows) and **multi-variant products**
 - number of **categories**
 - **present vs missing** data per template field (counts + %)
 - real vs placeholder coverage
-- unlisted / Published=false counts
+- unlisted / Published=false / Taxable=false counts
+- top multi-variant handles (variant counts)
 
 This is a **sanity check** after `/shopify_scrape` or `/shopify_csv`.
 
@@ -97,9 +99,10 @@ trying `open_resource` first.
 
 Show only:
 
-1. Summary: Products, Categories, Fields with missing, Unlisted count
+1. Summary: Products, **Variants**, Multi-variant products, Categories, Fields with missing, Unlisted count
 2. Top missing fields table (field → missing %)
 3. Category tally (category → products)
+4. Optional: top multi-variant handles if any
 
 Do not dump every field row in chat — the canvas has the full table.
 
@@ -107,11 +110,15 @@ Do not dump every field row in chat — the canvas has the full table.
 
 - Product-level fields (Title, Body, Vendor, …) are scored on **product rows**
   (rows with Title filled).
-- Variant fields are scored on product + variant rows.
+- Variant fields (Option*, Variant Price/SKU/…) are scored on **all priced
+  variant rows** (product row + extra variant rows).
 - Image fields are scored on all rows.
 - Placeholder values (e.g. `0.00` price, “Product details coming soon”, CDN
   placeholder image) count as **present** but are also tracked under
   **placeholder %**.
+- **variants** = count of rows with `Variant Price` filled
+- **multiVariantProducts** = handles with more than one priced variant row
+- Image-only rows must not have `Variant Price` (so they are not counted as variants)
 
 ## Related skills
 

@@ -36,15 +36,24 @@ scrape that site’s product catalog and build a CSV whose **headers match**
    - Leave `Variant Tax Code` blank
    - Do **not** default Taxable to `true` from source data; only set `true` if
      Justin explicitly asks
-4. Pull as much product data as the site exposes (title, body, vendor, type,
+4. **ALWAYS export all variants** (never first-variant-only)
+   - When a product has multiple sizes/designs/SKUs, write **every** variant as
+     its own CSV row (Shopify multi-variant import format).
+   - Row 1: product fields + first variant (+ image position 1)
+   - Following variant rows: same `Handle`, blank Title/Body, filled
+     Option*/Variant Price/SKU/qty
+   - Extra images remain image-only rows (no Variant Price)
+   - Prefer Shopify `product.json` / `products.json` variant arrays when present
+5. Pull as much product data as the site exposes (title, body, vendor, type,
    category, tags, options, SKU, price, compare-at, barcode, weight, images,
    SEO, Google Shopping fields when present).
-5. Validate images; replace corrupt/non-image URLs with the Shopify CDN
+6. Validate images; replace corrupt/non-image URLs with the Shopify CDN
    placeholder.
-6. Fill Shopify-safe placeholders for missing required variant fields so import
+7. Fill Shopify-safe placeholders for missing required variant fields so import
    does not fail.
-7. After a successful scrape, optionally remind Justin to run
-   **`/shopify_scrape_metric`** for the sanity-check canvas.
+8. After a successful scrape, optionally remind Justin to run
+   **`/shopify_scrape_metric`** for the sanity-check canvas (metrics include
+   total variants + multi-variant product counts).
 
 ## Paths
 
@@ -161,10 +170,10 @@ cp -f shopify/out/shopify_scrape_unlisted.csv "$HOME/Downloads/"
 Report:
 
 - Seed URL
-- Product URLs found / products scraped / CSV rows
+- Product URLs found / products scraped / **variants written** / multi-variant products / CSV rows
 - Images kept vs placeholder replacements
 - Output path
-- Confirmation: **all products unlisted**
+- Confirmation: **all products unlisted**, **no VAT**, **all variants exported**
 
 Then suggest: run `/shopify_scrape_metric` on the output CSV.
 
@@ -177,6 +186,7 @@ Then suggest: run `/shopify_scrape_metric` on the output CSV.
 
 - Publish products
 - Enable VAT/tax (`Variant Taxable=true`) unless Justin explicitly asks
+- Export only the first variant when more exist (always expand full variant list)
 - Invent product prices/descriptions beyond declared placeholders
 - Skip image validation unless Justin opts out
 - Scrape behind logins / ignore robots intent on tiny polite delays
